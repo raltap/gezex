@@ -3,371 +3,510 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GEZEX · Yol Haritası</title>
-<meta name="description" content="GEZEX Seyahat Kültürü Zirvesi: yolu takip et, duraklara tıkla.">
-<meta name="theme-color" content="#0E1116">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFD400'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='36' font-weight='700' fill='%230E1116' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
+<title>GEZEX · The Journey</title>
+<meta name="description" content="GEZEX Seyahat Kültürü Zirvesi: yolculuğa çık, her durakta zirveyi keşfet.">
+<meta name="theme-color" content="#05060A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%237CF7FF'/%3E%3Cstop offset='1' stop-color='%23B69CFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2305060A'/%3E%3Cpath d='M18 46 L32 14 L46 46' fill='none' stroke='url(%23g)' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0E1116;--ink2:#1A1F27;--ink3:#2A303A;--mut:#8A919C;--txt:#E9ECF1;--y:#FFD400;--b:#1F4FFF;--g:#2E7D4F;--w:#A10037;--paper:#FAFAF7;
---disp:"Bricolage Grotesque",system-ui,sans-serif;--sans:"DM Sans",system-ui,sans-serif;--mono:"Space Mono",ui-monospace,monospace}
-*{box-sizing:border-box;margin:0;padding:0}
-html{overflow-x:clip}
-body{background:var(--ink);color:var(--txt);font-family:var(--sans);overflow-x:clip;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-/* grid-paper map background */
-body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px}
-
-/* top bar */
-.top{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(var(--ink) 40%,transparent)}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:21px;text-decoration:none;letter-spacing:-.03em}
-.brand i{width:32px;height:32px;border-radius:50%;background:var(--y);color:var(--ink);display:grid;place-items:center;font-style:normal;font-size:16px}
-.switch{display:flex;background:var(--ink2);border:1px solid var(--ink3);border-radius:99px;padding:4px;font-family:var(--mono);font-size:12px;font-weight:700}
-.switch a{padding:8px 14px;border-radius:99px;text-decoration:none;color:var(--mut)}
-.switch a.on{background:var(--y);color:var(--ink)}
-
-/* intro */
-.intro{position:relative;min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 20px 40px}
-.intro .k{font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--y);margin-bottom:18px}
-.intro h1{font-family:var(--disp);font-weight:800;font-size:clamp(84px,16vw,200px);line-height:.85;letter-spacing:-.05em}
-.intro h1 span{background:var(--y);color:var(--ink);padding:0 .06em;display:inline-block;transform:rotate(-3deg)}
-.intro p{font-size:clamp(17px,2vw,21px);color:#C3C9D2;max-width:560px;margin:22px auto 0}
-.intro .meta{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:26px}
-.intro .meta span{font-family:var(--mono);font-size:12px;padding:8px 14px;border:1px dashed var(--ink3);border-radius:8px;color:#C3C9D2}
-.go{margin-top:38px;font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--y);display:flex;flex-direction:column;align-items:center;gap:10px}
-.go b{width:44px;height:44px;border-radius:50%;border:2px solid var(--y);display:grid;place-items:center;animation:bob 1.6s infinite}
-@keyframes bob{50%{transform:translateY(8px)}}
-.logos{display:flex;gap:10px;justify-content:center;margin-top:30px}
-.logos img{width:50px;height:50px;border-radius:12px;background:#fff;padding:4px}
-
-/* road */
-#map{position:relative;width:100%;max-width:1100px;margin:0 auto}
-#road{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-#road .asph{fill:none;stroke:var(--ink3);stroke-width:64;stroke-linecap:round;stroke-linejoin:round}
-#road .edge{fill:none;stroke:rgba(255,255,255,.18);stroke-width:70;stroke-linecap:round;stroke-linejoin:round}
-#road .mid{fill:none;stroke:var(--y);stroke-width:4;stroke-dasharray:18 18;stroke-linecap:round}
-#road .done{fill:none;stroke:var(--y);stroke-width:64;stroke-linecap:round;opacity:.13}
-#bus{position:absolute;left:0;top:0;width:54px;height:54px;margin:-27px 0 0 -27px;z-index:5;pointer-events:none;transition:transform .08s linear}
-#bus .in{width:100%;height:100%;border-radius:50%;background:var(--y);display:grid;place-items:center;box-shadow:0 0 0 6px rgba(255,212,0,.25),0 10px 30px rgba(0,0,0,.5)}
-#bus svg{width:30px;height:30px}
-
-/* stops */
-.stop{position:absolute;z-index:4;transform:translate(-50%,-50%)}
-.pin{width:26px;height:26px;border-radius:50%;background:var(--ink);border:4px solid var(--y);transition:.3s}
-.stop.reached .pin{background:var(--y);box-shadow:0 0 0 8px rgba(255,212,0,.18)}
-.sign{position:absolute;top:50%;transform:translateY(-50%);width:min(330px,38vw);cursor:pointer;background:var(--ink2);border:1px solid var(--ink3);border-radius:18px;padding:18px 20px;text-align:left;color:var(--txt);font:inherit;transition:.3s;opacity:.55}
-.stop.left .sign{right:46px}
-.stop.right .sign{left:46px}
-.sign::before{content:"";position:absolute;top:50%;width:34px;border-top:2px dashed var(--ink3)}
-.stop.left .sign::before{right:-36px}.stop.right .sign::before{left:-36px}
-.stop.reached .sign{opacity:1;border-color:rgba(255,212,0,.5)}
-.sign:hover{transform:translateY(-50%) scale(1.03);border-color:var(--y);background:#202631}
-.sign .km{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--y)}
-.sign h3{font-family:var(--disp);font-size:25px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:6px 0 6px}
-.sign p{font-size:14px;color:#AEB5C0;line-height:1.45}
-.sign .open{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink);background:var(--y);padding:6px 10px;border-radius:6px}
-.sign .ico{position:absolute;top:-16px;width:40px;height:40px;border-radius:10px;background:var(--y);color:var(--ink);display:grid;place-items:center;font-size:20px;transform:rotate(-6deg)}
-.stop.left .sign .ico{left:-10px}.stop.right .sign .ico{right:-10px;transform:rotate(6deg)}
-
-/* finish */
-.finish{position:relative;text-align:center;padding:40px 20px 120px}
-.finish .flag{font-size:44px}
-.finish h2{font-family:var(--disp);font-size:clamp(40px,7vw,80px);font-weight:800;letter-spacing:-.04em;line-height:1}
-.finish h2 span{color:var(--y)}
-.finish p{color:#C3C9D2;margin:16px auto 26px;max-width:520px}
-.btn{display:inline-flex;gap:8px;align-items:center;padding:14px 22px;border-radius:99px;font-weight:700;text-decoration:none;font-size:15px}
-.btn.y{background:var(--y);color:var(--ink)}
-.btn.o{border:2px solid var(--txt);margin-left:8px}
-
-/* route index (where am I) */
-.rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;gap:4px;background:rgba(26,31,39,.85);backdrop-filter:blur(10px);border:1px solid var(--ink3);border-radius:18px;padding:12px 10px}
-.rail .t{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--mut);padding:0 8px 6px}
-.rail button{display:flex;align-items:center;gap:10px;background:none;border:0;color:var(--mut);font:600 13px var(--sans);padding:5px 8px;border-radius:8px;cursor:pointer;text-align:left;white-space:nowrap}
-.rail button i{width:9px;height:9px;border-radius:50%;border:2px solid currentColor;flex:none}
-.rail button.done{color:#C3C9D2}.rail button.done i{background:currentColor}
-.rail button.now{color:var(--ink);background:var(--y)}.rail button.now i{background:var(--ink);border-color:var(--ink)}
-.rail button:hover:not(.now){color:var(--txt)}
-.odo{position:fixed;left:18px;bottom:18px;z-index:30;font-family:var(--mono);background:var(--ink2);border:1px solid var(--ink3);border-radius:14px;padding:10px 14px;font-size:11px;color:var(--mut);letter-spacing:.1em}
-.odo b{display:block;font-size:22px;color:var(--y);letter-spacing:0}
-.odo .bar{height:4px;background:var(--ink3);border-radius:4px;margin-top:6px;overflow:hidden;width:120px}
-.odo .bar i{display:block;height:100%;width:0;background:var(--y)}
-
-/* drawer */
-.veil{position:fixed;inset:0;background:rgba(5,7,10,.6);backdrop-filter:blur(3px);z-index:60;opacity:0;pointer-events:none;transition:.3s}
-.veil.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--paper);color:var(--ink);z-index:61;transform:translateX(105%);transition:transform .45s cubic-bezier(.2,.8,.2,1);overflow-y:auto;overscroll-behavior:contain}
-.drawer.on{transform:none}
-.d-head{position:sticky;top:0;background:var(--y);padding:22px 26px 20px;display:flex;justify-content:space-between;gap:16px;align-items:flex-start;z-index:2}
-.d-head .km{font-family:var(--mono);font-size:11px;letter-spacing:.14em}
-.d-head h2{font-family:var(--disp);font-size:34px;font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-top:4px}
-.x{flex:none;width:42px;height:42px;border-radius:50%;border:2px solid var(--ink);background:none;font-size:22px;cursor:pointer;color:var(--ink)}
-.x:hover{background:var(--ink);color:var(--y)}
-.d-body{padding:26px}
-.d-body p{color:#3A3F47;line-height:1.65;margin-bottom:14px}
-.d-body h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:#6B717A;margin:22px 0 10px;text-transform:uppercase}
-.d-nav{display:flex;justify-content:space-between;gap:10px;padding:18px 26px 30px;border-top:1px solid #E2E4DE}
-.d-nav button{background:var(--ink);color:var(--y);border:0;padding:12px 16px;border-radius:99px;font:700 13px var(--sans);cursor:pointer}
-.d-nav button:disabled{opacity:.25;cursor:default}
-.list{list-style:none;display:grid;gap:8px}
-.list li{background:#EEF0EA;border-radius:12px;padding:12px 14px;font-size:15px}
-.list li b{display:block}
-.list li small{color:#6B717A}
-.qs li{display:flex;gap:10px}.qs li::before{content:"?";flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--y);font-weight:800;font-size:12px;display:grid;place-items:center}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips span{background:#EEF0EA;border-radius:99px;padding:7px 12px;font-size:14px;font-weight:700}
-.sp{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center}
-.sp i{width:44px;height:44px;border-radius:50%;background:var(--y);display:grid;place-items:center;font-style:normal;font-family:var(--disp);font-weight:800}
-.tl{display:grid;grid-template-columns:96px 1fr;gap:12px}
-.tl time{font-family:var(--mono);font-weight:700;font-size:13px}
-.hero-card{display:flex;gap:16px;align-items:center;margin-bottom:16px}
-.hero-card img{width:86px;height:86px;border-radius:16px;background:#fff;border:1px solid #E2E4DE;padding:6px}
-.big{display:flex;gap:14px;align-items:center;background:var(--ink);color:#fff;border-radius:16px;padding:16px 18px;margin:16px 0}
-.big b{font-family:var(--disp);font-size:46px;line-height:.9;color:var(--y)}
-.links{display:grid;gap:8px;margin-top:10px}
-.links a{display:block;padding:11px 14px;border-radius:12px;background:var(--ink);color:var(--y);text-decoration:none;font-weight:700;font-size:14px}
-.note{font-size:13px;background:#FFF7CC;border:1px dashed #C9A800;border-radius:10px;padding:10px 12px;color:#5B4B00;margin-bottom:14px}
-.map-embed{width:100%;height:240px;border:0;border-radius:14px;margin-top:10px}
-details{border-bottom:1px solid #E2E4DE;padding:12px 0}
-summary{cursor:pointer;font-weight:700;font-size:16px}
-details p{margin:8px 0 0}
-
-@media (max-width:900px){.rail{display:none}}
-@media (max-width:720px){
-  .sign{width:calc(50vw - 40px);padding:14px 14px}
-  .sign h3{font-size:18px}
-  .sign p{display:none}
-  .stop.left .sign{right:30px}.stop.right .sign{left:30px}
-  .sign::before{width:18px}.stop.left .sign::before{right:-20px}.stop.right .sign::before{left:-20px}
-  .sign .ico{width:32px;height:32px;font-size:16px;top:-14px}
-  #road .asph{stroke-width:40}#road .edge{stroke-width:46}#road .done{stroke-width:40}
-  .odo{left:10px;bottom:10px;padding:7px 10px}.odo b{font-size:16px}.odo .bar{width:80px}
-  .switch a{padding:7px 10px}
-  .mrail{display:flex}
+:root{
+  --bg:#05060A; --txt:#ECEFF5; --dim:#8B93A3; --line:rgba(255,255,255,.1);
+  --c1:#7CF7FF; --c2:#B69CFF; --c3:#FF9AD5;
+  --holo:linear-gradient(100deg,var(--c1),var(--c2) 45%,var(--c3) 75%,var(--c1));
+  --disp:"Archivo",system-ui,sans-serif; --sans:"Inter Tight",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
 }
-body .mrail{display:none}
-@media (max-width:900px){body .mrail{display:flex}}
-.mrail{position:fixed;left:0;right:0;top:62px;z-index:35;gap:6px;overflow-x:auto;padding:6px 12px;scrollbar-width:none}
-.mrail::-webkit-scrollbar{display:none}
-.mrail button{flex:none;background:var(--ink2);border:1px solid var(--ink3);color:var(--mut);font:700 12px var(--sans);padding:6px 11px;border-radius:99px}
-.mrail button.now{background:var(--y);color:var(--ink);border-color:var(--y)}
-.mrail button.done{color:#C3C9D2}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--txt);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+body.nogl #gl{display:none}
+body.nogl{background:radial-gradient(1000px 600px at 50% 120%,#1b1440,transparent),var(--bg)}
+#track{position:relative;z-index:1;pointer-events:none}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(0,0,0,.75))}
+.noise{position:fixed;inset:-50%;z-index:2;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:gr 1s steps(4) infinite}
+@keyframes gr{25%{transform:translate(3%,-2%)}50%{transform:translate(-2%,3%)}75%{transform:translate(2%,2%)}}
+.holo-t{background:var(--holo);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:holo 8s linear infinite}
+@keyframes holo{to{background-position:300% 0}}
+
+/* HUD */
+.hud{position:fixed;z-index:20;pointer-events:none}
+.hud *{pointer-events:auto}
+.top{top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:22px 28px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--disp);font-weight:800;font-stretch:125%;letter-spacing:.06em;font-size:15px}
+.brand svg{width:26px;height:26px}
+.brand small{font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.2em;color:var(--dim);font-stretch:100%}
+.vs{display:flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:99px;background:rgba(10,12,18,.5);backdrop-filter:blur(12px);font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+.vs a{padding:8px 14px;border-radius:99px;text-decoration:none;color:var(--dim);transition:.25s}
+.vs a:hover{color:var(--txt)}
+.vs a.on{background:var(--txt);color:var(--bg)}
+
+.rail{left:28px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px}
+.rail::before{content:"";position:absolute;left:4px;top:10px;bottom:10px;width:1px;background:var(--line)}
+.rail .fill{position:absolute;left:4px;top:10px;width:1px;height:0;background:var(--holo);transition:height .4s}
+.rail button{position:relative;display:flex;align-items:center;gap:14px;background:none;border:0;color:var(--dim);font:500 12px var(--sans);letter-spacing:.02em;padding:5px 0;cursor:pointer;text-align:left;transition:color .3s}
+.rail button i{width:9px;height:9px;border-radius:50%;border:1px solid currentColor;background:var(--bg);flex:none;transition:.3s}
+.rail button span{opacity:.0;transform:translateX(-6px);transition:.3s;white-space:nowrap}
+.rail:hover button span,.rail button.now span{opacity:1;transform:none}
+.rail button.done{color:#C5CAD4}.rail button.done i{background:#C5CAD4}
+.rail button.now{color:var(--txt)}
+.rail button.now i{border:0;background:var(--c1);box-shadow:0 0 0 4px rgba(124,247,255,.15),0 0 16px var(--c1)}
+.rail button:hover{color:var(--txt)}
+
+.bottom{left:0;right:0;bottom:0;padding:0 28px 22px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.where{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim);min-width:0}
+.where b{display:block;font-family:var(--disp);font-stretch:125%;font-weight:700;font-size:15px;letter-spacing:.02em;color:var(--txt);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ctrl{display:flex;align-items:center;gap:8px;flex:none}
+.ctrl button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(10,12,18,.5);backdrop-filter:blur(12px);color:var(--txt);font-size:16px;cursor:pointer;transition:.25s}
+.ctrl button:hover{border-color:var(--c1);color:var(--c1)}
+.ctrl button:disabled{opacity:.25;cursor:default}
+.speed{font-family:var(--mono);text-align:right;font-size:10px;letter-spacing:.16em;color:var(--dim);flex:none}
+.speed b{display:block;font-family:var(--disp);font-stretch:125%;font-size:26px;font-weight:300;letter-spacing:0;color:var(--txt);line-height:1}
+.pbar{position:fixed;left:0;right:0;bottom:0;height:2px;z-index:21;background:rgba(255,255,255,.06)}
+.pbar i{display:block;height:100%;width:0;background:var(--holo)}
+
+/* overlays */
+.ov{position:fixed;z-index:10;pointer-events:none;opacity:0;will-change:opacity,transform,filter}
+.ov.live{pointer-events:auto}
+.intro{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 20px;opacity:1}
+.intro .k{font-family:var(--mono);font-size:11px;letter-spacing:.32em;color:var(--dim);margin-bottom:26px}
+.intro h1{font-family:var(--disp);font-weight:900;font-stretch:125%;font-size:clamp(64px,13vw,190px);line-height:.82;letter-spacing:-.02em}
+.intro .sub{font-family:var(--disp);font-stretch:100%;font-weight:300;font-size:clamp(18px,2.2vw,26px);letter-spacing:.02em;margin-top:20px;color:#C5CAD4}
+.intro .meta{display:flex;flex-wrap:wrap;justify-content:center;gap:0;margin-top:34px;border:1px solid var(--line);border-radius:14px;background:rgba(10,12,18,.4);backdrop-filter:blur(14px);overflow:hidden}
+.intro .meta div{padding:14px 22px;border-right:1px solid var(--line);text-align:left}
+.intro .meta div:last-child{border-right:0}
+.intro .meta small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--dim)}
+.intro .meta b{font-weight:500;font-size:14px}
+.cue{margin-top:44px;display:flex;flex-direction:column;align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--dim)}
+.cue i{width:1px;height:46px;background:linear-gradient(var(--c1),transparent);animation:cue 2s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.orgs{position:absolute;bottom:90px;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--dim)}
+.orgs img{width:38px;height:38px;border-radius:10px;background:#fff;padding:3px;opacity:.9}
+
+.panel{top:50%;width:min(540px,calc(100vw - 48px));max-height:76vh;overflow:auto;scrollbar-width:thin;scrollbar-color:#333 transparent;
+  background:linear-gradient(160deg,rgba(18,21,32,.72),rgba(8,9,14,.62));backdrop-filter:blur(22px) saturate(1.4);-webkit-backdrop-filter:blur(22px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.09);border-radius:22px;padding:34px 34px 30px;box-shadow:0 40px 120px -30px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.06)}
+.panel::before{content:"";position:absolute;left:34px;right:34px;top:0;height:1px;background:var(--holo);opacity:.8}
+.panel.L{left:max(140px,7vw)}
+.panel.R{right:max(40px,6vw)}
+.p-k{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--dim);margin-bottom:18px}
+.p-k b{font-weight:500;color:var(--c1)}
+.panel h2{font-family:var(--disp);font-weight:800;font-stretch:115%;font-size:clamp(28px,3vw,40px);line-height:1;letter-spacing:-.01em;margin-bottom:6px}
+.panel .tag{font-family:var(--disp);font-stretch:100%;font-weight:300;font-size:17px;color:#C5CAD4;margin-bottom:20px}
+.panel p{color:#B4BAC6;font-size:15px;line-height:1.65;margin-bottom:14px}
+.panel p b,.panel p strong{color:var(--txt);font-weight:600}
+.panel h4{font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.22em;color:var(--dim);margin:22px 0 10px}
+.rows{list-style:none;border-top:1px solid var(--line)}
+.rows li{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.rows li em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--c1);letter-spacing:.06em;min-width:22px}
+.rows li small{display:block;color:var(--dim);font-size:13px;margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:13px;padding:6px 12px;border:1px solid var(--line);border-radius:99px;color:#C5CAD4;background:rgba(255,255,255,.02)}
+.stat{display:flex;align-items:baseline;gap:14px;margin:18px 0 6px}
+.stat b{font-family:var(--disp);font-weight:200;font-stretch:125%;font-size:72px;line-height:.85}
+.stat span{color:var(--dim);font-size:14px;line-height:1.35}
+.club-h{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.club-h img{width:64px;height:64px;border-radius:14px;background:#fff;padding:5px;flex:none}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.links a{font-size:13px;font-weight:500;text-decoration:none;padding:9px 14px;border-radius:99px;border:1px solid rgba(124,247,255,.35);color:var(--c1);transition:.25s}
+.links a:hover{background:var(--c1);color:var(--bg)}
+.sp{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.sp div{padding:10px 0;border-bottom:1px solid var(--line)}
+.sp b{display:block;font-size:14.5px;font-weight:600}
+.sp small{color:var(--dim);font-size:12.5px}
+.note{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--c3);border:1px dashed rgba(255,154,213,.35);border-radius:10px;padding:9px 12px;margin-bottom:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.prize{border:1px solid var(--line);border-radius:14px;padding:16px;background:rgba(255,255,255,.02)}
+.prize small{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--dim)}
+.prize b{display:block;font-family:var(--disp);font-stretch:110%;font-size:19px;font-weight:600;margin-top:6px}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:13px 0;font-weight:500;font-size:15px;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--c1);font-family:var(--mono)}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 14px!important}
+
+.finish{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 20px}
+.finish .k{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--dim);margin-bottom:20px}
+.finish h2{font-family:var(--disp);font-weight:900;font-stretch:125%;font-size:clamp(44px,8vw,120px);line-height:.88}
+.finish p{color:#B4BAC6;max-width:520px;margin:22px auto 30px;font-size:16px;line-height:1.6}
+.cta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.cta a{text-decoration:none;padding:15px 24px;border-radius:99px;font-weight:600;font-size:15px;transition:.25s}
+.cta .a1{background:var(--txt);color:var(--bg)}
+.cta .a1:hover{background:var(--c1)}
+.cta .a2{border:1px solid var(--line)}
+.cta .a2:hover{border-color:var(--c2);color:var(--c2)}
+
+@media (max-width:1100px){.rail{display:none}.panel.L{left:24px}.panel.R{right:24px}}
+@media (max-width:720px){
+  .top{padding:16px 16px}
+  .brand small{display:none}
+  .vs a{padding:7px 11px}
+  .panel{top:auto!important;bottom:92px;left:16px!important;right:16px!important;width:auto;max-height:calc(100svh - 190px);padding:24px 20px 20px;border-radius:18px}
+  .panel::before{left:20px;right:20px}
+  .panel h2{font-size:28px}
+  .sp,.grid2{grid-template-columns:1fr}
+  .stat b{font-size:56px}
+  .bottom{padding:0 16px 16px}
+  .speed{display:none}
+  .intro .meta div{padding:11px 14px}
+  .orgs{bottom:100px}
+}
+@media (prefers-reduced-motion:reduce){.noise,.holo-t,.cue i{animation:none}}
 </style>
 </head>
 <body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="vignette"></div>
+<div class="noise"></div>
+<div id="track"></div>
 
-<div class="top">
-  <a class="brand" href="#"><i>G</i>GEZEX</a>
-  <div class="switch" role="navigation" aria-label="Sürüm seç"><a href="../">V1 · Klasik</a><a class="on" href="./">V2 · Yol</a></div>
-</div>
-<div class="mrail" id="mrail"></div>
-
-<header class="intro">
-  <div class="k">İBN HALDUN ÜNİVERSİTESİ · SEYAHAT KÜLTÜRÜ ZİRVESİ</div>
-  <h1>GEZ<span>EX</span></h1>
-  <p>Bu bir site değil, bir rota. Yolu takip et, durakların tabelalarına tıkla, zirveyi adım adım keşfet.</p>
-  <div class="meta"><span>📅 Kasım sonu – Aralık başı · Salı</span><span>🕐 13.00 – 18.00</span><span>📍 İHÜ Külliyesi</span><span>👥 100 yolcu</span></div>
-  <div class="logos"><img src="../assets/gezi.jpg" alt="Gezi Kulübü"><img src="../assets/kariyer.jpg" alt="Kariyer ve Gelişim Kulübü"></div>
-  <div class="go">YOLA ÇIK<b>↓</b></div>
+<!-- HUD -->
+<header class="hud top">
+  <a class="brand" href="#" id="home"><svg viewBox="0 0 64 64"><defs><linearGradient id="bg1" x1="0" x2="1"><stop offset="0" stop-color="#7CF7FF"/><stop offset="1" stop-color="#B69CFF"/></linearGradient></defs><path d="M14 50 L32 12 L50 50" fill="none" stroke="url(#bg1)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M32 30 V50" stroke="url(#bg1)" stroke-width="3" stroke-dasharray="3 5" stroke-linecap="round"/></svg><span>GEZEX<br><small>THE JOURNEY</small></span></a>
+  <nav class="vs" aria-label="Sürüm seç"><a href="../">V1</a><a class="on" href="./">V2</a></nav>
 </header>
+<nav class="hud rail" id="rail" aria-label="Duraklar"><div class="fill" id="rfill"></div></nav>
+<footer class="hud bottom">
+  <div class="where" id="where">KONUM<b>Başlangıç</b></div>
+  <div class="ctrl"><button id="bPrev" aria-label="Önceki durak">←</button><button id="bNext" aria-label="Sonraki durak">→</button></div>
+  <div class="speed">YOL<b id="km">0.0</b>KM</div>
+</footer>
+<div class="pbar"><i id="pbar"></i></div>
 
-<div id="map">
-  <svg id="road" aria-hidden="true"><path class="edge" id="pEdge"/><path class="asph" id="pAsph"/><path class="done" id="pDone"/><path class="mid" id="pMid"/></svg>
-  <div id="bus"><div class="in"><svg viewBox="0 0 24 24" fill="#0E1116"><path d="M4 16c0 .9.4 1.7 1 2.2V20a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1h8v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1.8c.6-.5 1-1.3 1-2.2V6c0-3.5-3.6-4-8-4S4 2.5 4 6v10zm3.5 1a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm9 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 11H6V6h12v5z"/></svg></div></div>
-</div>
-
-<section class="finish" id="finish">
-  <div class="flag">🏁</div>
-  <h2>Rotanın sonu.<br><span>Yolculuk şimdi başlıyor.</span></h2>
-  <p>Kontenjan 100 kişi. Kayıt formu açıldığında ilk duyan olmak için kulüpleri takip et.</p>
-  <a class="btn y" href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener">@ihugezi →</a><a class="btn o" href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener">@ihukariyergelisimkulubu</a>
+<!-- intro -->
+<section class="ov intro live" id="intro">
+  <div class="k">İBN HALDUN ÜNİVERSİTESİ · SEYAHAT KÜLTÜRÜ ZİRVESİ</div>
+  <h1 class="holo-t">GEZEX</h1>
+  <div class="sub">Yolda öğrenmek. Güvenle gezmek. Yolu hayata dönüştürmek.</div>
+  <div class="meta">
+    <div><small>TARİH</small><b>Kasım sonu – Aralık başı</b></div>
+    <div><small>GÜN · SAAT</small><b>Salı · 13.00–18.00</b></div>
+    <div><small>KONUM</small><b>İHÜ Külliyesi</b></div>
+    <div><small>KONTENJAN</small><b>100 kişi</b></div>
+  </div>
+  <div class="cue">KAYDIR · YOLA ÇIK<i></i></div>
+  <div class="orgs"><img src="../assets/gezi.jpg" alt="Gezi Kulübü"><img src="../assets/kariyer.jpg" alt="Kariyer ve Gelişim Kulübü"><span>GEZİ KULÜBÜ × KARİYER VE GELİŞİM KULÜBÜ</span></div>
 </section>
 
-<nav class="rail" id="rail" aria-label="Rota"><div class="t">ROTA</div></nav>
-<div class="odo"><span>KAT EDİLEN</span><b id="km">0 km</b><div class="bar"><i id="bar"></i></div></div>
+<div id="panels"></div>
 
-<div class="veil" id="veil"></div>
-<aside class="drawer" id="drawer" aria-hidden="true">
-  <div class="d-head"><div><div class="km" id="dKm"></div><h2 id="dTitle"></h2></div><button class="x" id="x" aria-label="Kapat">×</button></div>
-  <div class="d-body" id="dBody"></div>
-  <div class="d-nav"><button id="prev">← Önceki durak</button><button id="next">Sonraki durak →</button></div>
-</aside>
+<section class="ov finish" id="finish">
+  <div class="k">VARIŞ NOKTASI</div>
+  <h2 class="holo-t">Yol bir okuldur.</h2>
+  <p>Kontenjan 100 kişi. Kayıt formu açıldığında ilk duyan olmak için kulüplerimizi takip et.</p>
+  <div class="cta"><a class="a1" href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener">@ihugezi</a><a class="a2" href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener">@ihukariyergelisimkulubu</a><a class="a2" href="../">Klasik sürüm</a></div>
+</section>
 
 <script>
-const IG='<svg width="0" height="0"></svg>';
-const stops=[
- {id:"nedir",ico:"🧭",t:"GEZEX nedir?",s:"Seyahati iki açıdan ele alan bir günlük zirve.",b:`
-  <p>GEZEX, seyahati iki açıdan ele alan bir günlük zirve: insanın kendini keşfettiği bir yolculuk ve sürdürülebilir bir kariyerle yaşam biçimi. İHÜ öğrencilerine ve dışarıdan katılımcılara açık.</p>
-  <div class="big"><b>100</b><span>katılımcı · 3 oturum · 5 saat · 1 gün</span></div>
-  <h4>Alt başlık 01 · Seyahat Kültürü</h4>
-  <p>Seyahati öğrenme, gözlem ve kendini tanıma süreci olarak ele alıyoruz: geziye amaç ve gözlem planıyla hazırlanmak, gidilen yerin kültürüyle saygılı bağ kurmak, dönüşte deneyimi paylaşıp belgelemek.</p>
-  <div class="chips"><span>Anlam</span><span>Keşif</span><span>Kendini gerçekleştirme</span></div>
-  <h4>Alt başlık 02 · Kariyer ve Sürdürülebilirlik</h4>
-  <p>Gezginlik nasıl bir meslek ve yaşam biçimine dönüşür? Turizm, içerik üretimi, uzaktan çalışma, sponsorluk, kişisel marka ve yapay zekâ çağının yeni meslekleri.</p>
-  <div class="chips"><span>Kariyer yolu</span><span>Gezginlik</span><span>Remote life</span></div>`},
- {id:"o1",ico:"👣",t:"1. Oturum · Yolda Öğrenmek",s:"Bir seyyahın kişisel keşfi ve nasıl gezilir?",b:`
-  <p><b>13.20 – 14.30.</b> Turist ile gezgin farkı, keşif duygusu, gözlem yapmak ve bir geziyi baştan sona planlamak.</p>
-  <h4>Cevap arayacağımız sorular</h4>
-  <ul class="list qs"><li>Keşif duygusu ve içsel motivasyon nereden gelir?</li><li>Gezmek nasıl öğrenmeye dönüşür?</li><li>Turist ile gezgini ayıran nedir?</li></ul>`},
- {id:"o2",ico:"🎒",t:"2. Oturum · Yalnız Yola Çıkmak",s:"Bir kadın gezginin gözünden dünyayı görmek.",b:`
-  <p><b>14.40 – 15.50.</b> Yalnız seyahat ve özgüven, yolda karar vermek, farklı kültürlerle temas ve bir kadın gezginin gözünden dünyayı görmek.</p>
-  <h4>Cevap arayacağımız sorular</h4>
-  <ul class="list qs"><li>Sizi yola çıkaran neydi, yolculuklar sizi nasıl değiştirdi?</li><li>Kadın gezginler yolda neler yaşıyor, birbirini nasıl destekliyor?</li><li>İlk adımı atmaya cesaret edemeyen birine ne söylersiniz?</li></ul>`},
- {id:"o3",ico:"💼",t:"3. Oturum · Modern Çağın Seyyahı",s:"Kariyer yolculuğu ve ekonomik sürdürülebilirlik.",b:`
-  <p><b>16.20 – 17.30.</b> Dijital göçebelik, sponsorluk, kişisel marka ve yapay zekâ çağında gezginlik.</p>
-  <h4>Cevap arayacağımız sorular</h4>
-  <ul class="list qs"><li>Gezginler sponsorlarını nasıl buluyor?</li><li>Gezginlik sürdürülebilir bir kariyer olabilir mi?</li><li>Dijital göçebelik ve yapay zekâ çağında bu işin geleceği ne?</li></ul>`},
- {id:"konusmaci",ico:"🎤",t:"Aday konuşmacılar",s:"Yolu hayatına dönüştürmüş 10 isim.",b:`
-  <div class="note">Davet süreci devam ediyor; liste kesin değildir. Kesinleşen isimler ayrıca duyurulacak.</div>
-  <h4>1. Oturum adayları</h4><ul class="list">
-   <li class="sp"><i>SB</i><div><b>Seymen Bozaslan</b><small>Gezgin, fotoğrafçı, yazar · Evliya Çelebi'nin izinde 74 şehir</small></div></li>
-   <li class="sp"><i>OO</i><div><b>Orkun Olgar</b><small>Gezgin ve içerik üreticisi</small></div></li>
-   <li class="sp"><i>RS</i><div><b>Reshid Strick</b><small>Gezgin</small></div></li></ul>
-  <h4>2. Oturum adayları</h4><ul class="list">
-   <li class="sp"><i>AÖ</i><div><b>Asil Özbay</b><small>Akademisyen ve motosikletli gezgin · 3 kıtada solo yolculuk</small></div></li>
-   <li class="sp"><i>ŞY</i><div><b>Şeyma Yolda</b><small>Gezgin</small></div></li>
-   <li class="sp"><i>NY</i><div><b>Nurten Yulu</b><small>Gezgin · Okinawa Travel</small></div></li>
-   <li class="sp"><i>FA</i><div><b>Fatmanur Aydın</b><small>Gezgin · Okinawa Travel</small></div></li></ul>
-  <h4>3. Oturum adayları</h4><ul class="list">
-   <li class="sp"><i>KA</i><div><b>Kerem Akyol</b><small>Gezgin ve içerik üreticisi · Kekmundo</small></div></li>
-   <li class="sp"><i>SB</i><div><b>Selahattin Baltacı</b><small>Gezgin ve içerik üreticisi · Gez</small></div></li>
-   <li class="sp"><i>RS</i><div><b>Rotasız Seyyah</b><small>Gezgin ve içerik üreticisi</small></div></li></ul>`},
- {id:"program",ico:"🕐",t:"Program akışı",s:"13.00'te kayıt, 17.50'de toplu fotoğraf.",b:`
-  <ul class="list">
-   <li class="tl"><time>13.00</time><div><b>Kayıt ve açılış</b><small>Eşantiyon kiti, çekiliş kuponu, açılış konuşmaları</small></div></li>
-   <li class="tl"><time>13.20</time><div><b>1. Oturum · Yolda Öğrenmek</b></div></li>
-   <li class="tl"><time>14.30</time><div><b>Kısa ara</b></div></li>
-   <li class="tl"><time>14.40</time><div><b>2. Oturum · Yalnız Yola Çıkmak</b></div></li>
-   <li class="tl"><time>15.50</time><div><b>Namaz ve kahve arası</b><small>Fotoğraf ve röportaj köşesi açık</small></div></li>
-   <li class="tl"><time>16.20</time><div><b>3. Oturum · Modern Çağın Seyyahı</b></div></li>
-   <li class="tl"><time>17.30</time><div><b>Çekiliş, ödül ve plaket takdimi</b></div></li>
-   <li class="tl"><time>17.50</time><div><b>Kapanış ve toplu fotoğraf</b></div></li></ul>`},
- {id:"odul",ico:"🎁",t:"Ödüller ve gezgin kiti",s:"Çadır, sırt çantası, powerbank ve daha fazlası.",b:`
-  <h4>Çekiliş ödülleri</h4>
-  <ul class="list"><li><b>🎒 Sırt çantası</b><small>25 litre</small></li><li><b>⛺ Kamp çadırı</b><small>2 kişilik</small></li><li><b>🔋 Powerbank</b><small>10.000 mAh</small></li><li><b>🧾 Alışveriş çeki</b><small>Outdoor alışverişi için</small></li></ul>
-  <p style="margin-top:12px">Kayıtta verilen kuponla 17.30'da çekiliş yapılacak. Kuponunu saklamayı unutma.</p>
-  <h4>Gezgin kiti · kayıtta</h4>
-  <div class="chips"><span>📓 Seyahat günlüğü</span><span>☕ Termos 450 ml</span><span>👜 Bez çanta</span><span>🖊️ Kalem</span></div>
-  <h4>Salonun dışında</h4>
-  <div class="chips"><span>📸 Fotoğraf köşesi</span><span>🎙️ Röportaj köşesi</span><span>▶️ TEDx formatında kayıt</span><span>🤝 Gezgin ağı</span></div>`},
- {id:"gezi",ico:"🚌",t:"İHÜ Gezi Kulübü",s:"Son üç yılda 20 şehir. GEZEX'in yol tarafı.",b:`
-  <div class="hero-card"><img src="../assets/gezi.jpg" alt="Gezi Kulübü logosu"><div><b style="font-family:var(--disp);font-size:22px">İHÜ Gezi Kulübü</b><br><small style="color:#6B717A">Ibn Haldun University Travel Club</small></div></div>
-  <p>Gezi Kulübü, öğrencilerin hem birbirleriyle hem de yaşadıkları coğrafyayla kaynaşması için kurulmuş, İbn Haldun'un en hareketli topluluklarından biri. Rehber eşliğinde, öğrenci bütçesine uygun ve kontenjanlı gezilerle kampüsü her dönem Anadolu'nun farklı bir köşesine taşıyor.</p>
-  <p>Denizli Buldan'a yapılan <em>Kültür Yolu</em> gezisinde İstanbul'dan ve farklı ülkelerden gelen öğrenciler yerel el sanatları merkezini ziyaret edip tarihi çarşıda esnafla buluştu. Yeni dönemler Bolu Yedigöller gibi doğa rotalarıyla açılıyor; kış Uludağ'da, bahar Kapadokya'da geçiyor. Türkçe, İngilizce ve Arapça paylaşım yapan kulüp, uluslararası öğrencileri de yolculuğa katıyor.</p>
-  <div class="big" style="background:var(--g)"><b style="color:#fff">20</b><span>şehir · son üç yılda düzenlenen gezilerle</span></div>
-  <h4>Rotalarından bazıları</h4>
-  <div class="chips"><span>🏔️ Uludağ</span><span>🎈 Kapadokya</span><span>🌲 Yedigöller</span><span>🧵 Denizli Buldan</span><span>🕌 Edirne</span><span>🪂 Tekirdağ</span><span>🚆 Doğu</span><span>🌿 Atatürk Arboretumu</span></div>
-  <div class="links"><a href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener">Instagram · @ihugezi</a><a href="https://www.youtube.com/channel/UCtsw1vH3ZVyRZvLgzL7372Q" target="_blank" rel="noopener">YouTube kanalı</a><a href="mailto:gezikulubu@stu.ihu.edu.tr">gezikulubu@stu.ihu.edu.tr</a></div>`},
- {id:"kariyer",ico:"📈",t:"İHÜ Kariyer ve Gelişim Kulübü",s:"META Summit'in arkasındaki ekip. GEZEX'in kariyer tarafı.",b:`
-  <div class="hero-card"><img src="../assets/kariyer.jpg" alt="Kariyer ve Gelişim Kulübü logosu"><div><b style="font-family:var(--disp);font-size:22px">Kariyer ve Gelişim Kulübü</b><br><small style="color:#6B717A">Career and Development Club</small></div></div>
-  <p>Kariyer ve Gelişim Kulübü, öğrencileri iş dünyasının önde gelen isimleri ve kurumlarıyla buluşturarak kampüs ile sektör arasında köprü kuruyor. Zirveler, paneller ve kurum buluşmalarıyla öğrencilerin mezun olmadan bir ağ kurmasını hedefliyor.</p>
-  <p>Kulübün imza etkinliği <b>META Summit</b>; Ekonomi ve Finans Kulübü ile 2022'den bu yana düzenleniyor. <b>NextStep Zirvesi</b> ÜNİDES kapsamında destek almaya hak kazandı. Borsa İstanbul, THY ve Turkcell gibi kurumlarla buluşmalar da öne çıkan çalışmaları arasında.</p>
-  <div class="big" style="background:var(--w)"><b style="color:#fff">4</b><span>META Summit · 2022'den bu yana</span></div>
-  <div class="links"><a href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener">Instagram · @ihukariyergelisimkulubu</a><a href="https://www.metasummit.site" target="_blank" rel="noopener">metasummit.site</a><a href="mailto:kariyergelisimkulubu@stu.ihu.edu.tr">kariyergelisimkulubu@stu.ihu.edu.tr</a></div>`},
- {id:"ulasim",ico:"🚇",t:"Kampüse ulaşım",s:"M3, M11, İETT hatları ve harita.",b:`
-  <p><b>İbn Haldun Üniversitesi Külliyesi</b><br>Başak Mah. Ordu Cad. No:3, Başakşehir / İstanbul</p>
-  <ul class="list">
-   <li><b>M3 · Başakşehir–Metrokent</b><small>Kampüse yaklaşık 4 km</small></li>
-   <li><b>M11 · İbn Haldun Üniversitesi İstasyonu</b><small>Gayrettepe–Halkalı hattı; güncel durumu Metro İstanbul'dan kontrol edin</small></li>
-   <li><b>İETT</b><small>78C, 78E, 78F, 78G, 78K, 78Ş · Kayaşehir tarafından MK22</small></li>
-   <li><b>Erken gel</b><small>Kit ve çekiliş kuponu için 15 dk erken gelmeni öneririz</small></li></ul>
-  <iframe class="map-embed" loading="lazy" title="Harita" src="https://www.google.com/maps?q=%C4%B0bn+Haldun+%C3%9Cniversitesi+Ba%C5%9Fak%C5%9Fehir&output=embed"></iframe>
-  <div class="links"><a href="https://maps.google.com/?q=%C4%B0bn+Haldun+%C3%9Cniversitesi+Ba%C5%9Fak%C5%9Fehir" target="_blank" rel="noopener">Yol tarifi al →</a></div>`},
- {id:"sss",ico:"❓",t:"Sık sorulanlar",s:"Tarih, kayıt, çekiliş, kayıtlar.",b:`
-  <details open><summary>GEZEX ne zaman?</summary><p>Kasım'ın son iki haftası ile Aralık'ın ilk iki haftası arasındaki bir Salı, 13.00–18.00. Kesin tarih duyurulacak.</p></details>
-  <details><summary>Kimler katılabilir?</summary><p>Tüm bölümlerden İHÜ öğrencileri ve dışarıdan katılımcılar. Kontenjan 100 kişi.</p></details>
-  <details><summary>Nasıl kayıt olurum?</summary><p>Kayıt formu yakında açılacak. @ihugezi ve @ihukariyergelisimkulubu hesaplarını takip et.</p></details>
-  <details><summary>Oturumları sonradan izleyebilir miyim?</summary><p>Evet, konuşmalar TEDx formatında Gezi Kulübü YouTube kanalında yayımlanacak.</p></details>
-  <details><summary>Sponsor olabilir miyiz?</summary><p>Elbette. gezikulubu@stu.ihu.edu.tr adresinden bize ulaşın.</p></details>`}
+const STOPS=[
+{n:"Nedir?",t:"GEZEX nedir?",g:"Seyahat, yer görmekten fazlasıdır.",b:`
+ <p>GEZEX seyahati iki açıdan ele alan bir günlük zirve: insanın kendini keşfettiği bir yolculuk ve sürdürülebilir bir kariyerle yaşam biçimi. İHÜ öğrencilerine ve dışarıdan katılımcılara açık.</p>
+ <div class="stat"><b class="holo-t">100</b><span>katılımcı<br>3 oturum · 5 saat · 1 gün</span></div>
+ <h4>İKİ ALT BAŞLIK</h4>
+ <ul class="rows"><li><em>01</em><div><b>Seyahat Kültürü</b><small>Öğrenme, gözlem ve kendini tanıma süreci olarak seyahat</small></div></li><li><em>02</em><div><b>Kariyer ve Sürdürülebilirlik</b><small>Gezginliğin meslek ve yaşam biçimine dönüşmesi</small></div></li></ul>`},
+{n:"1. Oturum",t:"Yolda Öğrenmek",g:"Bir seyyahın kişisel keşfi ve nasıl gezilir?",time:"13.20 – 14.30",b:`
+ <p>Turist ile gezgin farkı, keşif duygusu, gözlem yapmak ve bir geziyi baştan sona planlamak.</p>
+ <h4>CEVAP ARAYACAĞIMIZ SORULAR</h4>
+ <ul class="rows"><li><em>Q1</em><div>Keşif duygusu ve içsel motivasyon nereden gelir?</div></li><li><em>Q2</em><div>Gezmek nasıl öğrenmeye dönüşür?</div></li><li><em>Q3</em><div>Turist ile gezgini ayıran nedir?</div></li></ul>`},
+{n:"2. Oturum",t:"Yalnız Yola Çıkmak",g:"Sınırların ötesinde, bir kadın gezginin gözünden.",time:"14.40 – 15.50",b:`
+ <p>Yalnız seyahat ve özgüven, yolda karar vermek, farklı kültürlerle temas ve bir kadın gezginin gözünden dünyayı görmek.</p>
+ <h4>CEVAP ARAYACAĞIMIZ SORULAR</h4>
+ <ul class="rows"><li><em>Q1</em><div>Sizi yola çıkaran neydi, yolculuklar sizi nasıl değiştirdi?</div></li><li><em>Q2</em><div>Kadın gezginler yolda neler yaşıyor, birbirini nasıl destekliyor?</div></li><li><em>Q3</em><div>İlk adımı atmaya cesaret edemeyen birine ne söylersiniz?</div></li></ul>`},
+{n:"3. Oturum",t:"Modern Çağın Seyyahı",g:"Kariyer yolculuğu ve ekonomik sürdürülebilirlik.",time:"16.20 – 17.30",b:`
+ <p>Dijital göçebelik, sponsorluk, kişisel marka ve yapay zekâ çağında gezginlik.</p>
+ <h4>CEVAP ARAYACAĞIMIZ SORULAR</h4>
+ <ul class="rows"><li><em>Q1</em><div>Gezginler sponsorlarını nasıl buluyor?</div></li><li><em>Q2</em><div>Gezginlik sürdürülebilir bir kariyer olabilir mi?</div></li><li><em>Q3</em><div>Dijital göçebelik ve yapay zekâ çağında bu işin geleceği ne?</div></li></ul>`},
+{n:"Konuşmacılar",t:"Aday konuşmacılar",g:"Yolu hayatına dönüştürmüş isimler.",b:`
+ <div class="note">DAVET SÜRECİ DEVAM EDİYOR · LİSTE KESİN DEĞİLDİR</div>
+ <div class="sp">
+  <div><b>Seymen Bozaslan</b><small>Gezgin, fotoğrafçı, yazar</small></div>
+  <div><b>Asil Özbay</b><small>Akademisyen, motosikletli gezgin</small></div>
+  <div><b>Şeyma Yolda</b><small>Gezgin</small></div>
+  <div><b>Kerem Akyol</b><small>Kekmundo</small></div>
+  <div><b>Nurten Yulu</b><small>Okinawa Travel</small></div>
+  <div><b>Fatmanur Aydın</b><small>Okinawa Travel</small></div>
+  <div><b>Selahattin Baltacı</b><small>Gez</small></div>
+  <div><b>Reshid Strick</b><small>Gezgin</small></div>
+  <div><b>Rotasız Seyyah</b><small>Gezgin, içerik üreticisi</small></div>
+  <div><b>Orkun Olgar</b><small>Gezgin, içerik üreticisi</small></div>
+ </div>`},
+{n:"Program",t:"Program akışı",g:"Beş saatlik bir yolculuk.",b:`
+ <ul class="rows">
+  <li><em>13.00</em><div>Kayıt, gezgin kiti, açılış</div></li>
+  <li><em>13.20</em><div><b>1. Oturum</b> · Yolda Öğrenmek</div></li>
+  <li><em>14.30</em><div>Kısa ara</div></li>
+  <li><em>14.40</em><div><b>2. Oturum</b> · Yalnız Yola Çıkmak</div></li>
+  <li><em>15.50</em><div>Namaz ve kahve arası</div></li>
+  <li><em>16.20</em><div><b>3. Oturum</b> · Modern Çağın Seyyahı</div></li>
+  <li><em>17.30</em><div>Çekiliş, ödül ve plaket takdimi</div></li>
+  <li><em>17.50</em><div>Kapanış ve toplu fotoğraf</div></li></ul>`},
+{n:"Ödüller",t:"Ödüller ve gezgin kiti",g:"Yola hazırlayan hediyeler.",b:`
+ <h4>ÇEKİLİŞ · 17.30</h4>
+ <div class="grid2">
+  <div class="prize"><small>01</small><b>Sırt çantası</b><small>25 LİTRE</small></div>
+  <div class="prize"><small>02</small><b>Kamp çadırı</b><small>2 KİŞİLİK</small></div>
+  <div class="prize"><small>03</small><b>Powerbank</b><small>10.000 MAH</small></div>
+  <div class="prize"><small>04</small><b>Alışveriş çeki</b><small>OUTDOOR</small></div></div>
+ <h4>GEZGİN KİTİ · KAYITTA</h4>
+ <div class="chips"><span>Seyahat günlüğü</span><span>Termos 450 ml</span><span>Bez çanta</span><span>Kalem</span></div>
+ <h4>ALANDA</h4>
+ <div class="chips"><span>Fotoğraf köşesi</span><span>Röportaj köşesi</span><span>TEDx formatında kayıt</span></div>`},
+{n:"Gezi Kulübü",t:"İHÜ Gezi Kulübü",g:"GEZEX'in yol tarafı.",b:`
+ <div class="club-h"><img src="../assets/gezi.jpg" alt="Gezi Kulübü logosu"><div class="chips"><span>Ibn Haldun University Travel Club</span></div></div>
+ <p>Öğrencilerin birbirleriyle ve yaşadıkları coğrafyayla kaynaşması için kurulan kulüp; rehber eşliğinde, öğrenci bütçesine uygun gezilerle kampüsü her dönem Anadolu'nun farklı bir köşesine taşıyor. Buldan'daki <b>Kültür Yolu</b> gezisinde yerli ve uluslararası öğrenciler el sanatları merkezinde ve tarihi çarşıda buluştu.</p>
+ <div class="stat"><b class="holo-t">20</b><span>şehir<br>son üç yılda</span></div>
+ <div class="chips"><span>Uludağ</span><span>Kapadokya</span><span>Yedigöller</span><span>Denizli · Buldan</span><span>Edirne</span><span>Tekirdağ</span><span>Doğu</span><span>Atatürk Arboretumu</span></div>
+ <div class="links"><a href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener">@ihugezi</a><a href="https://www.youtube.com/channel/UCtsw1vH3ZVyRZvLgzL7372Q" target="_blank" rel="noopener">YouTube</a><a href="mailto:gezikulubu@stu.ihu.edu.tr">E-posta</a></div>`},
+{n:"Kariyer Kulübü",t:"Kariyer ve Gelişim Kulübü",g:"GEZEX'in kariyer tarafı.",b:`
+ <div class="club-h"><img src="../assets/kariyer.jpg" alt="Kariyer ve Gelişim Kulübü logosu"><div class="chips"><span>Career and Development Club</span></div></div>
+ <p>Öğrencileri iş dünyasının önde gelen isimleri ve kurumlarıyla buluşturarak kampüs ile sektör arasında köprü kuruyor. İmza etkinliği <b>META Summit</b> 2022'den bu yana Ekonomi ve Finans Kulübü ile düzenleniyor; <b>NextStep Zirvesi</b> ÜNİDES desteği aldı.</p>
+ <div class="stat"><b class="holo-t">4</b><span>META Summit<br>2022'den bu yana</span></div>
+ <div class="chips"><span>META Summit</span><span>NextStep</span><span>Borsa İstanbul</span><span>THY</span><span>Turkcell</span></div>
+ <div class="links"><a href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener">@ihukariyergelisimkulubu</a><a href="https://www.metasummit.site" target="_blank" rel="noopener">metasummit.site</a></div>`},
+{n:"Ulaşım",t:"Kampüse ulaşım",g:"Başak Mah. Ordu Cad. No:3, Başakşehir",b:`
+ <ul class="rows">
+  <li><em>M3</em><div><b>Başakşehir–Metrokent</b><small>Kampüse yaklaşık 4 km</small></div></li>
+  <li><em>M11</em><div><b>İbn Haldun Üniversitesi İstasyonu</b><small>Gayrettepe–Halkalı hattı; güncel durumu kontrol edin</small></div></li>
+  <li><em>BUS</em><div><b>İETT</b><small>78C, 78E, 78F, 78G, 78K, 78Ş · Kayaşehir'den MK22</small></div></li>
+  <li><em>TIP</em><div><b>15 dakika erken gel</b><small>Gezgin kiti ve çekiliş kuponu için</small></div></li></ul>
+ <div class="links"><a href="https://maps.google.com/?q=%C4%B0bn+Haldun+%C3%9Cniversitesi+Ba%C5%9Fak%C5%9Fehir" target="_blank" rel="noopener">Haritada aç →</a></div>`},
+{n:"SSS",t:"Sık sorulanlar",g:"Yola çıkmadan önce.",b:`
+ <details open><summary>GEZEX ne zaman?</summary><p>Kasım'ın son iki haftası ile Aralık'ın ilk iki haftası arasındaki bir Salı, 13.00–18.00. Kesin tarih duyurulacak.</p></details>
+ <details><summary>Kimler katılabilir?</summary><p>Tüm bölümlerden İHÜ öğrencileri ve dışarıdan katılımcılar. Kontenjan 100 kişi.</p></details>
+ <details><summary>Nasıl kayıt olurum?</summary><p>Kayıt formu yakında açılacak; kulüplerin Instagram hesaplarını takip et.</p></details>
+ <details><summary>Oturumlar kaydedilecek mi?</summary><p>Evet, TEDx formatında Gezi Kulübü YouTube kanalında yayımlanacak.</p></details>
+ <details><summary>Sponsor olabilir miyiz?</summary><p>gezikulubu@stu.ihu.edu.tr adresinden bize ulaşın.</p></details>`}
 ];
-const short=["Nedir?","1. Oturum","2. Oturum","3. Oturum","Konuşmacılar","Program","Ödüller","Gezi Kulübü","Kariyer Kulübü","Ulaşım","SSS"];
+const N=STOPS.length;
+// paneller
+document.getElementById("panels").innerHTML=STOPS.map((s,i)=>`
+ <section class="ov panel ${i%2?"R":"L"}" data-i="${i}">
+  <div class="p-k"><span>DURAK <b>${String(i+1).padStart(2,"0")}</b> / ${N}</span><span>${s.time||s.n.toUpperCase()}</span></div>
+  <h2>${s.t}</h2><div class="tag">${s.g}</div>${s.b}
+ </section>`).join("");
+</script>
 
-const map=document.getElementById("map"),bus=document.getElementById("bus");
-const P={edge:pEdge,asph:pAsph,done:pDone,mid:pMid};
-const GAP=()=>innerWidth<720?300:340;
-let pts=[],len=0;
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from "three";
 
-function build(){
-  map.querySelectorAll(".stop").forEach(e=>e.remove());
-  const W=map.clientWidth, gap=GAP(), H=gap*(stops.length+1);
-  map.style.height=H+"px";
-  const xs=innerWidth<720?[.5,.5]:[.5,.5];
-  pts=[{x:W*.5,y:0}];
-  stops.forEach((s,i)=>pts.push({x:W*(i%2?.58:.42)+(i%3-1)*W*.03,y:gap*(i+1)}));
-  pts.push({x:W*.5,y:H});
-  // smooth wiggly path through points (alternating swing)
-  let d=`M${pts[0].x},${pts[0].y}`;
-  for(let i=1;i<pts.length;i++){
-    const a=pts[i-1],b=pts[i],sw=(i%2?1:-1)*W*(innerWidth<720?.22:.26);
-    d+=` C${a.x+sw},${a.y+gap*.35} ${b.x+sw},${b.y-gap*.35} ${b.x},${b.y}`;
+const N=STOPS.length, VH=()=>innerHeight;
+const track=document.getElementById("track");
+const SEG=1.15; // her durak için ekran yüksekliği
+const setTrack=()=>track.style.height=((N+2)*SEG*VH()+VH())+"px";
+setTrack();
+const maxScroll=()=>document.documentElement.scrollHeight-innerHeight;
+// durakların kaydırma oranları
+const stopP=i=>(i+1)/(N+1);
+
+/* ---------- 3D ---------- */
+let gl=true, renderer;
+try{ renderer=new THREE.WebGLRenderer({canvas:document.getElementById("gl"),antialias:true,powerPreference:"high-performance"}); }
+catch(e){ gl=false; document.body.classList.add("nogl"); }
+
+const BG=new THREE.Color("#05060A");
+const scene=new THREE.Scene();
+scene.fog=new THREE.Fog(BG,25,240);
+const cam=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,600);
+
+// yol eğrisi
+const L=70, pts=[];
+for(let i=0;i<=N+3;i++){
+  const s=i===0?0:i;
+  pts.push(new THREE.Vector3(Math.sin(s*1.15)*16+Math.sin(s*.43)*8, Math.sin(s*.8)*2.2, -i*L));
+}
+const curve=new THREE.CatmullRomCurve3(pts,false,"catmullrom",.5);
+const CL=curve.getLength();
+// kamera yolun u∈[0,uEnd] kısmında gezer
+const uEnd=(N+1.4)/(N+3);
+const camU=p=>p*uEnd;
+const gateU=i=>camU(stopP(i))+ 40/CL; // kapı, durağa gelince kameranın 22 birim önünde
+
+const UP=new THREE.Vector3(0,1,0);
+const holoA=new THREE.Color("#7CF7FF"), holoB=new THREE.Color("#B69CFF"), holoC=new THREE.Color("#FF9AD5");
+
+if(gl){
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.setClearColor(BG,1);
+
+  // --- yol şeridi
+  const S=1400, W=6.2, pos=[], uv=[], idx=[];
+  for(let k=0;k<=S;k++){
+    const u=k/S, p=curve.getPointAt(u), t=curve.getTangentAt(u), side=new THREE.Vector3().crossVectors(t,UP).normalize();
+    const a=p.clone().addScaledVector(side,-W), b=p.clone().addScaledVector(side,W);
+    pos.push(a.x,a.y,a.z,b.x,b.y,b.z); uv.push(0,u*CL,1,u*CL);
+    if(k<S){const o=k*2; idx.push(o,o+1,o+2,o+1,o+3,o+2);}
   }
-  Object.values(P).forEach(p=>p.setAttribute("d",d));
-  len=P.mid.getTotalLength();
-  P.done.style.strokeDasharray=len;
-  stops.forEach((s,i)=>{
-    const p=pts[i+1],side=i%2?"right":"left";
-    const el=document.createElement("div");
-    el.className="stop "+side;el.id="s-"+s.id;el.style.left=p.x+"px";el.style.top=p.y+"px";
-    el.innerHTML=`<div class="pin"></div><button class="sign" data-i="${i}"><span class="ico">${s.ico}</span><div class="km">DURAK ${String(i+1).padStart(2,"0")} · ${(i+1)*7} KM</div><h3>${s.t}</h3><p>${s.s}</p><span class="open">AÇ +</span></button>`;
-    map.appendChild(el);
-    const off=innerWidth<720?30:46, avail=(side==="left"?p.x:W-p.x)-off-10;
-    el.querySelector(".sign").style.width=Math.min(330,avail)+"px";
+  const rg=new THREE.BufferGeometry();
+  rg.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));
+  rg.setAttribute("uv",new THREE.Float32BufferAttribute(uv,2));
+  rg.setIndex(idx);
+  const roadMat=new THREE.ShaderMaterial({transparent:true,side:THREE.DoubleSide,depthWrite:false,
+    uniforms:{uT:{value:0},uC:{value:0}},
+    vertexShader:`varying vec2 vUv;varying float vD;void main(){vUv=uv;vec4 mv=modelViewMatrix*vec4(position,1.);vD=-mv.z;gl_Position=projectionMatrix*mv;}`,
+    fragmentShader:`uniform float uT;uniform float uC;varying vec2 vUv;varying float vD;
+    void main(){
+      float x=vUv.x,v=vUv.y;
+      vec3 cy=vec3(.49,.97,1.),vi=vec3(.71,.61,1.),pk=vec3(1.,.6,.84);
+      vec3 col=vec3(.018,.022,.035);
+      float lane=abs(x-.5);
+      float cross=step(.985,fract(v*.1));                       // enine ince çizgiler
+      float along=smoothstep(.006,0.,abs(fract(x*6.)-.5)-.494);  // boyuna ince çizgiler
+      col+=mix(cy,vi,x)*(cross*.10+along*.06);
+      float dash=step(.45,fract(v*.09));
+      float center=(1.-smoothstep(.002,.007,lane))*dash;
+      float glow=(1.-smoothstep(0.,.05,lane))*dash*.18;
+      float edge=1.-smoothstep(0.,.025,min(x,1.-x));
+      col+=cy*(center*.95+glow);
+      col+=mix(vi,pk,.5+.5*sin(v*.02))*edge*1.6;
+      float scan=pow(.5+.5*sin(v*.35-uT*5.),18.);                 // ileri akan tarama dalgası
+      col+=cy*scan*.25*(1.-lane*1.4);
+      float near=1.-smoothstep(0.,40.,abs(v-uC));                  // kameranın altındaki parlama
+      col+=vi*near*.05;
+      float f=smoothstep(20.,230.,vD);
+      gl_FragColor=vec4(mix(col,vec3(.02,.024,.04),f),(1.-f)*.97);
+    }`});
+  scene.add(new THREE.Mesh(rg,roadMat));
+  window.__road=roadMat;
+
+  // --- zemin ızgarası (sonsuz)
+  const floorMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{uT:{value:0}},
+    vertexShader:`varying vec3 vW;varying float vD;void main(){vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;vec4 mv=viewMatrix*w;vD=-mv.z;gl_Position=projectionMatrix*mv;}`,
+    fragmentShader:`varying vec3 vW;varying float vD;
+    float grid(vec2 p,float s){vec2 g=abs(fract(p/s-.5)-.5)/fwidth(p/s);return 1.-min(min(g.x,g.y),1.);}
+    void main(){
+      float g=grid(vW.xz,6.)*.55+grid(vW.xz,30.)*.9;
+      vec3 c=mix(vec3(.38,.33,1.),vec3(.49,.97,1.),.5+.5*sin(vW.z*.004));
+      float f=smoothstep(10.,200.,vD);
+      gl_FragColor=vec4(c*g*.55,(1.-f)*g*.6);
+    }`});
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(900,900),floorMat);
+  floor.rotation.x=-Math.PI/2; floor.position.y=-7; scene.add(floor);
+  window.__floor=floor;
+
+  // --- yan ışık direkleri
+  const lp=[],lc=[];
+  for(let d=0;d<CL;d+=14){
+    const u=d/CL,p=curve.getPointAt(u),t=curve.getTangentAt(u),side=new THREE.Vector3().crossVectors(t,UP).normalize();
+    for(const sgn of[-1,1]){
+      const b=p.clone().addScaledVector(side,sgn*11.5); b.y-=7;
+      const c=sgn<0?holoA:holoB;
+      lp.push(b.x,b.y,b.z,b.x,b.y+12+Math.sin(d)*2,b.z); lc.push(c.r*.05,c.g*.05,c.b*.05,c.r,c.g,c.b);
+    }
+  }
+  const lg=new THREE.BufferGeometry();
+  lg.setAttribute("position",new THREE.Float32BufferAttribute(lp,3));
+  lg.setAttribute("color",new THREE.Float32BufferAttribute(lc,3));
+  scene.add(new THREE.LineSegments(lg,new THREE.LineBasicMaterial({vertexColors:true,transparent:true,opacity:.75,blending:THREE.AdditiveBlending,fog:true})));
+
+  // --- kapılar (her durak)
+  window.__gates=[];
+  const frameGeo=(w,h,th)=>{const s=new THREE.Shape();s.moveTo(-w/2,0);s.lineTo(w/2,0);s.lineTo(w/2,h);s.lineTo(-w/2,h);s.lineTo(-w/2,0);
+    const hole=new THREE.Path();hole.moveTo(-w/2+th,th*0+.0001);hole.lineTo(-w/2+th,h-th);hole.lineTo(w/2-th,h-th);hole.lineTo(w/2-th,.0001);s.holes.push(hole);return new THREE.ShapeGeometry(s);};
+  const fg=frameGeo(17,9.5,.12), fg2=frameGeo(15.2,8.4,.05);
+  STOPS.forEach((s,i)=>{
+    const u=gateU(i),p=curve.getPointAt(u),t=curve.getTangentAt(u);
+    const g=new THREE.Group(); g.position.copy(p); g.lookAt(p.clone().sub(t));
+    const c=[holoA,holoB,holoC][i%3];
+    const m1=new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:.9,blending:THREE.AdditiveBlending,side:THREE.DoubleSide,fog:true,depthWrite:false});
+    const m2=m1.clone(); m2.opacity=.35;
+    const f1=new THREE.Mesh(fg,m1), f2=new THREE.Mesh(fg2,m2); f2.position.z=-2.5; g.add(f1,f2);
+    // etiket
+    const cv=document.createElement("canvas");cv.width=1024;cv.height=200;const x=cv.getContext("2d");
+    x.font="300 64px 'JetBrains Mono',monospace";x.fillStyle="#7CF7FF";x.fillText(String(i+1).padStart(2,"0"),20,120);
+    x.font="800 92px 'Archivo',sans-serif";x.fillStyle="#ECEFF5";x.fillText(s.n.toLocaleUpperCase("tr"),150,128);
+    const tex=new THREE.CanvasTexture(cv); tex.colorSpace=THREE.SRGBColorSpace;
+    const lab=new THREE.Mesh(new THREE.PlaneGeometry(10,1.95),new THREE.MeshBasicMaterial({map:tex,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,fog:true,side:THREE.DoubleSide}));
+    lab.position.set(-8.5+5,10.6,0); g.add(lab);
+    scene.add(g); __gates.push({g,m1,m2,lab,u});
   });
-  // stop y positions along path (by length) for progress
-  stopLen=stops.map((s,i)=>nearestLen(pts[i+1].y));
-  update();
+
+  // --- parçacıklar
+  const PN=2600,pp=new Float32Array(PN*3);
+  for(let k=0;k<PN;k++){const p=curve.getPointAt(Math.random());pp[k*3]=p.x+(Math.random()-.5)*140;pp[k*3+1]=p.y-6+Math.random()*40;pp[k*3+2]=p.z+(Math.random()-.5)*60;}
+  const pg=new THREE.BufferGeometry();pg.setAttribute("position",new THREE.BufferAttribute(pp,3));
+  const dc=document.createElement("canvas");dc.width=dc.height=64;const dx=dc.getContext("2d");
+  const rgd=dx.createRadialGradient(32,32,0,32,32,32);rgd.addColorStop(0,"rgba(255,255,255,1)");rgd.addColorStop(.3,"rgba(255,255,255,.5)");rgd.addColorStop(1,"rgba(255,255,255,0)");
+  dx.fillStyle=rgd;dx.fillRect(0,0,64,64);
+  scene.add(new THREE.Points(pg,new THREE.PointsMaterial({map:new THREE.CanvasTexture(dc),color:"#A9E9FF",size:.45,transparent:true,opacity:.75,blending:THREE.AdditiveBlending,depthWrite:false,fog:true})));
 }
-let stopLen=[];
-function nearestLen(y){let lo=0,hi=len;for(let k=0;k<30;k++){const m=(lo+hi)/2;P.mid.getPointAtLength(m).y<y?lo=m:hi=m}return lo}
 
-// rails
-const rail=document.getElementById("rail"),mrail=document.getElementById("mrail");
-stops.forEach((s,i)=>{
-  const b=document.createElement("button");b.innerHTML=`<i></i>${short[i]}`;b.onclick=()=>goTo(i);rail.appendChild(b);
-  const m=document.createElement("button");m.textContent=short[i];m.onclick=()=>goTo(i);mrail.appendChild(m);
-});
-function goTo(i){const el=document.getElementById("s-"+stops[i].id);scrollTo({top:el.getBoundingClientRect().top+scrollY-innerHeight*.45,behavior:"smooth"})}
+/* ---------- kaydırma, kamera, arayüz ---------- */
+const panels=[...document.querySelectorAll(".panel")];
+const intro=document.getElementById("intro"), finish=document.getElementById("finish");
+const rail=document.getElementById("rail"), rfill=document.getElementById("rfill");
+const where=document.getElementById("where"), kmEl=document.getElementById("km"), pbar=document.getElementById("pbar");
+const bPrev=document.getElementById("bPrev"), bNext=document.getElementById("bNext");
+STOPS.forEach((s,i)=>{const b=document.createElement("button");b.innerHTML=`<i></i><span>${String(i+1).padStart(2,"0")} · ${s.n}</span>`;b.onclick=()=>jump(i);rail.appendChild(b)});
+const rbtn=[...rail.querySelectorAll("button")];
+function jump(i){const p=i<0?0:i>=N?1:stopP(i);scrollTo({top:p*maxScroll(),behavior:"smooth"})}
+document.getElementById("home").onclick=e=>{e.preventDefault();jump(-1)};
 
-let cur=-1;
-function update(){
-  if(!len)return;
-  const r=map.getBoundingClientRect();
-  const y=Math.min(Math.max(innerHeight*.5-r.top,0),map.clientHeight);
-  const L=nearestLen(y);
-  const p=P.mid.getPointAtLength(L),q=P.mid.getPointAtLength(Math.min(L+2,len));
-  bus.style.transform=`translate(${p.x}px,${p.y}px) rotate(${Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI-90}deg)`;
-  P.done.style.strokeDashoffset=len-L;
-  let c=-1;stopLen.forEach((sl,i)=>{if(L>=sl-4)c=i});
-  document.querySelectorAll(".stop").forEach((e,i)=>e.classList.toggle("reached",i<=c));
-  const frac=L/len;
-  document.getElementById("km").textContent=Math.round(frac*(stops.length+1)*7)+" km";
-  document.getElementById("bar").style.width=(frac*100)+"%";
-  if(c!==cur){cur=c;
-    [...rail.querySelectorAll("button")].forEach((b,i)=>{b.classList.toggle("now",i===c);b.classList.toggle("done",i<c)});
-    const mb=[...mrail.children];mb.forEach((b,i)=>{b.classList.toggle("now",i===c);b.classList.toggle("done",i<c)});
-    if(mb[c])mrail.scrollTo({left:mb[c].offsetLeft-mrail.clientWidth/2+mb[c].clientWidth/2,behavior:"smooth"});
+let target=0, cur=0, last=0, mx=0, my=0, curStop=-2;
+const ss=(a,b,x)=>{const t=Math.min(Math.max((x-a)/(b-a),0),1);return t*t*(3-2*t)};
+const readScroll=()=>{target=Math.min(Math.max(scrollY/Math.max(maxScroll(),1),0),1)};
+addEventListener("scroll",readScroll,{passive:true});
+addEventListener("pointermove",e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+addEventListener("resize",()=>{setTrack();readScroll();if(gl){renderer.setSize(innerWidth,innerHeight);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()}});
+readScroll(); cur=target;
+
+function currentStop(p){let c=-1;for(let i=0;i<N;i++){if(p>=stopP(i)-.5/(N+1))c=i}return p>stopP(N-1)+.5/(N+1)?N:c}
+bPrev.onclick=()=>jump(Math.max(curStop-1,-1));
+bNext.onclick=()=>jump(Math.min(curStop+1,N));
+addEventListener("keydown",e=>{if(e.key==="ArrowDown"||e.key==="PageDown"){e.preventDefault();bNext.click()}if(e.key==="ArrowUp"||e.key==="PageUp"){e.preventDefault();bPrev.click()}});
+
+const clock=new THREE.Clock();
+const tmpA=new THREE.Vector3(),tmpB=new THREE.Vector3();
+function frame(){
+  const dt=Math.min(clock.getDelta(),.05), time=clock.elapsedTime;
+  cur+= (target-cur)*Math.min(1,dt*3.2);
+  const vel=(cur-last)/Math.max(dt,1e-3); last=cur;
+  const p=cur;
+
+  if(gl){
+    const u=camU(p);
+    curve.getPointAt(Math.min(u,1),tmpA);
+    curve.getPointAt(Math.min(u+.012,1),tmpB);
+    cam.position.set(tmpA.x+mx*1.2, tmpA.y+2.6-my*.8, tmpA.z);
+    tmpB.y+=1.9; cam.lookAt(tmpB);
+    cam.rotation.z+= -mx*.03;
+    cam.fov=58+Math.min(Math.abs(vel)*260,20); cam.updateProjectionMatrix();
+    __road.uniforms.uT.value=time; __road.uniforms.uC.value=u*CL;
+    __floor.position.x=tmpA.x; __floor.position.z=tmpA.z;
+    __gates.forEach((g,i)=>{const d=Math.abs(g.u-u)*CL;const pulse=.75+.25*Math.sin(time*2+i);g.m1.opacity=pulse*(d<6?d/6:1);g.m2.opacity=.3*pulse;});
+    renderer.render(scene,cam);
   }
+
+  // intro / panel / finish görünürlüğü
+  const iO=1-ss(0,.035,p); intro.style.opacity=iO; intro.style.transform=`scale(${1+(1-iO)*.15})`; intro.style.filter=`blur(${(1-iO)*10}px)`; intro.classList.toggle("live",iO>.5);
+  const half=.5/(N+1);
+  panels.forEach((el,i)=>{
+    const d=(p-stopP(i))/half;            // -1..1 aralığında görünür
+    const o=d<0?ss(-1,-.45,d):1-ss(.45,1,d);
+    el.style.opacity=o;
+    const side=i%2?1:-1;
+    el.style.transform=`translateY(-50%) translate3d(${(1-o)*side*-30}px,${d*-40}px,0) scale(${.94+o*.06})`;
+    el.style.filter=o<1?`blur(${(1-o)*8}px)`:"none";
+    el.classList.toggle("live",o>.6);
+    if(innerWidth<=720) el.style.transform=`translate3d(0,${(1-o)*40+d*-20}px,0) scale(${.96+o*.04})`;
+  });
+  const fO=ss(stopP(N-1)+half*1.05,1,p); finish.style.opacity=fO; finish.classList.toggle("live",fO>.5); finish.style.transform=`scale(${.92+fO*.08})`;
+
+  // konum
+  const c=currentStop(p);
+  if(c!==curStop){curStop=c;
+    rbtn.forEach((b,i)=>{b.classList.toggle("now",i===c);b.classList.toggle("done",i<c)});
+    where.innerHTML=c<0?`KONUM<b>Başlangıç</b>`:c>=N?`KONUM<b>Varış noktası</b>`:`DURAK ${String(c+1).padStart(2,"0")} / ${N}<b>${STOPS[c].t}</b>`;
+    bPrev.disabled=c<0; bNext.disabled=c>=N;
+  }
+  rfill.style.height=(Math.min(Math.max(p/stopP(N-1),0),1)*100)+"%";
+  pbar.style.width=(p*100)+"%";
+  kmEl.textContent=(p*(N+1)*7).toFixed(1);
+  requestAnimationFrame(frame);
 }
-addEventListener("scroll",()=>requestAnimationFrame(update),{passive:true});
-let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(build,150)});
-
-// drawer
-const dr=document.getElementById("drawer"),veil=document.getElementById("veil");
-let open=-1;
-function show(i){open=i;const s=stops[i];
-  dKm.textContent=`DURAK ${String(i+1).padStart(2,"0")} / ${stops.length} · ${s.ico}`;dTitle.textContent=s.t;dBody.innerHTML=s.b;
-  prev.disabled=i===0;next.disabled=i===stops.length-1;
-  dr.classList.add("on");veil.classList.add("on");dr.setAttribute("aria-hidden","false");dr.scrollTop=0;document.body.style.overflow="hidden";}
-function hide(){dr.classList.remove("on");veil.classList.remove("on");dr.setAttribute("aria-hidden","true");document.body.style.overflow="";if(open>-1)goTo(open);open=-1}
-map.addEventListener("click",e=>{const b=e.target.closest(".sign");if(b)show(+b.dataset.i)});
-x.onclick=hide;veil.onclick=hide;
-prev.onclick=()=>show(open-1);next.onclick=()=>show(open+1);
-addEventListener("keydown",e=>{if(open<0)return;if(e.key==="Escape")hide();if(e.key==="ArrowRight"&&open<stops.length-1)show(open+1);if(e.key==="ArrowLeft"&&open>0)show(open-1)});
-
-document.fonts?document.fonts.ready.then(build):build();
-build();
+(document.fonts?document.fonts.ready:Promise.resolve()).then(()=>requestAnimationFrame(frame));
 </script>
 </body>
 </html>
