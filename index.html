@@ -376,6 +376,33 @@ details[open] summary::after{background:var(--yellow);border-color:var(--ink);co
 footer h6{color:var(--yellow)}
 footer a:hover{color:var(--yellow)}
 .hero-route path{stroke:var(--ink);opacity:.25}
+
+/* sürüm butonu */
+.nav-links{gap:20px}
+.vswitch{display:flex;background:var(--ink);border-radius:99px;padding:4px;margin-left:16px;font-family:var(--mono);font-size:12px;font-weight:700;flex:none}
+.vswitch a{padding:7px 12px;border-radius:99px;text-decoration:none;color:#B8BEC8;white-space:nowrap}
+.vswitch a.on{background:var(--yellow);color:var(--ink)}
+.vswitch a:not(.on):hover{color:var(--yellow)}
+.nav-in{gap:12px}
+@media (max-width:860px){.vswitch{margin-left:auto}}
+/* menüde bulunduğun bölüm */
+.nav-links a.active{color:var(--ink);background:var(--yellow);padding:4px 10px;border-radius:99px;margin:-4px -10px}
+.nav-links a.active::after{display:none}
+/* sol ilerleme çizgisi */
+.prog{position:fixed;left:18px;top:50%;transform:translate(-20px,-50%);z-index:45;display:flex;flex-direction:column;gap:14px;opacity:0;pointer-events:none;transition:.35s}
+.prog.show{opacity:1;pointer-events:auto;transform:translate(0,-50%)}
+.prog-line{position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.prog-line i{display:block;width:100%;height:0;background:var(--ink);transition:height .3s}
+.prog a{position:relative;display:flex;align-items:center;gap:10px;text-decoration:none;height:14px}
+.prog b{width:14px;height:14px;border-radius:50%;background:var(--paper);border:2px solid var(--line);flex:none;transition:.25s;position:relative;z-index:1}
+.prog a.done b{background:var(--ink);border-color:var(--ink)}
+.prog a.now b{background:var(--yellow);border-color:var(--ink);transform:scale(1.35)}
+.prog span{font-size:12px;font-weight:700;color:var(--ink);background:var(--paper);border:1px solid var(--line);padding:3px 9px;border-radius:99px;opacity:0;transform:translateX(-6px);transition:.2s;white-space:nowrap}
+.prog a.now span,.prog a:hover span{opacity:1;transform:none}
+.prog a.now span{background:var(--yellow);border-color:var(--yellow)}
+#konusmacilar~* .prog{}
+@media (max-width:1280px){.prog span{display:none}.prog a:hover span{display:block;position:absolute;left:22px}}
+@media (max-width:860px){.prog{left:8px;gap:10px}.prog b{width:11px;height:11px}.prog-line{left:4.5px}}
 </style>
 </head>
 <body>
@@ -395,6 +422,7 @@ footer a:hover{color:var(--yellow)}
       <li><a href="#ulasim">Ulaşım</a></li>
       <li><a href="#kayit" class="nav-cta">Kayıt Ol →</a></li>
     </ul>
+    <div class="vswitch" aria-label="Sürüm seç"><a class="on" href="./">V1</a><a href="v2/" title="Yol haritası sürümü">V2 · Yol ✦</a></div>
     <button class="burger" id="burger" aria-label="Menüyü aç"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -814,6 +842,25 @@ document.getElementById("filter").addEventListener("click",e=>{
   document.querySelectorAll("#filter button").forEach(x=>x.classList.toggle("on",x===b));
   document.querySelectorAll(".sp").forEach(c=>c.classList.toggle("hide",b.dataset.f!=="all"&&c.dataset.s!==b.dataset.f));
 });
+
+// konum göstergesi: menü vurgusu + sol ilerleme çizgisi
+(()=>{
+  const ids=[["top","Başlangıç"],["hakkinda","Hakkında"],["oturumlar","Oturumlar"],["konusmacilar","Konuşmacılar"],["program","Program"],["odul","Ödüller"],["kulupler","Kulüpler"],["ulasim","Ulaşım"],["sss","SSS"],["kayit","Kayıt"]];
+  const rail=document.createElement("nav");rail.className="prog";rail.setAttribute("aria-label","Bölümler");
+  rail.innerHTML='<div class="prog-line"><i></i></div>'+ids.map(([id,t])=>`<a href="#${id}" data-id="${id}"><b></b><span>${t}</span></a>`).join("");
+  document.body.appendChild(rail);
+  const fill=rail.querySelector(".prog-line i"),dots=[...rail.querySelectorAll("a")],menu=[...document.querySelectorAll(".nav-links a:not(.nav-cta)")];
+  const secs=ids.map(([id])=>document.getElementById(id));
+  const tick=()=>{
+    const mid=scrollY+innerHeight*.35;let c=0;
+    secs.forEach((s,i)=>{if(s&&s.offsetTop<=mid)c=i});
+    dots.forEach((d,i)=>{d.classList.toggle("now",i===c);d.classList.toggle("done",i<c)});
+    fill.style.height=(c/(ids.length-1)*100)+"%";
+    menu.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+ids[c][0]));
+    rail.classList.toggle("show",scrollY>innerHeight*.6);
+  };
+  addEventListener("scroll",()=>requestAnimationFrame(tick),{passive:true});tick();
+})();
 
 // nav
 const nav=document.getElementById("nav"),links=document.getElementById("links");
