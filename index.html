@@ -468,6 +468,22 @@ a.c3-link:hover{background:#0400D1;color:#fff}
 #toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#0B0A3A;color:#fff;padding:14px 22px;border-radius:14px;font-weight:600;font-size:15px;z-index:200;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 14px 30px rgba(0,0,0,.25)}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 @media (max-width:900px){.clubs3{grid-template-columns:1fr}}
+
+/* === SSS minimal, iki sütun === */
+.faq{max-width:1040px;display:grid;grid-template-columns:1fr 1fr;gap:0 48px;align-items:start}
+.faq-col{display:flex;flex-direction:column}
+#sss details{border-bottom:1px solid var(--line);padding:0}
+#sss details:first-child{border-top:1px solid var(--line)}
+#sss summary{font-family:var(--sans);font-size:16px;font-weight:600;padding:18px 0;gap:14px;letter-spacing:0}
+#sss summary::after{content:"+";width:auto;height:auto;border:0;border-radius:0;background:none!important;color:var(--ink)!important;font-family:var(--mono);font-size:18px;font-weight:400;transition:transform .25s}
+#sss details[open] summary::after{transform:rotate(45deg);color:var(--yellow)!important}
+#sss details[open] summary{color:#0400D1}
+#sss details p{padding:0 28px 18px 0;font-size:15px;line-height:1.6}
+@media (max-width:760px){.faq{grid-template-columns:1fr}.faq-col+.faq-col details:first-child{border-top:0}}
+/* sol çizgi sadece geniş ekranda; dar ekranda üstte ince çubuk */
+@media (max-width:1320px){.prog{display:none!important}}
+.topbar{position:fixed;left:0;top:0;height:3px;width:0;background:var(--yellow);z-index:60;transition:width .1s linear}
+@media (min-width:1321px){.topbar{display:none}}
 </style>
 </head>
 <body>
@@ -792,15 +808,7 @@ a.c3-link:hover{background:#0400D1;color:#fff}
       <div class="eyebrow">Merak edilenler</div>
       <h2>Sık sorulan <em>sorular</em></h2>
     </div>
-    <div class="faq rv">
-      <details><summary>GEZEX ne zaman?</summary><p>Kasım'ın son iki haftası ile Aralık'ın ilk iki haftası arasındaki bir Salı günü, 13.00–18.00 saatleri arasında. Kesin tarih Instagram hesaplarımızdan ve bu sayfadan duyurulacak.</p></details>
-      <details><summary>Kimler katılabilir?</summary><p>Tüm bölümlerden İbn Haldun Üniversitesi öğrencileri ve dışarıdan katılımcılar. Kontenjan 100 kişiyle sınırlı.</p></details>
-      <details><summary>Nasıl kayıt olabilirim?</summary><p>Başvuru formu çok yakında açılacak; sayfanın üstündeki <b>Yerini Ayırt</b> butonundan ulaşabileceksin. Formun açıldığını kaçırmamak için <a href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener">@ihugezi</a> ve <a href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener">@ihukariyergelisimkulubu</a> hesaplarını takip et.</p></details>
-      <details><summary>Çekilişe nasıl katılırım?</summary><p>Kayıt masasında herkese bir çekiliş kuponu verilecek. Çekiliş 17.30'da program sonunda yapılacak; kuponunu saklamayı unutma.</p></details>
-      <details><summary>Oturumları sonradan izleyebilir miyim?</summary><p>Evet. Konuşmalar TEDx formatında kaydedilip Gezi Kulübü'nün YouTube kanalında yayımlanacak.</p></details>
-      <details><summary>Konuşmacılar kesinleşti mi?</summary><p>Hayır, sayfadaki isimler aday konuşmacılardır ve davet süreci devam ediyor. Kesinleşen konuşmacılar ayrıca duyurulacak.</p></details>
-      <details><summary>Destekçi ya da sponsor olabilir miyiz?</summary><p>Elbette. İkram, ulaşım ve çekiliş ödülleri için destek arıyoruz. <a href="mailto:gezikulubu@stu.ihu.edu.tr">gezikulubu@stu.ihu.edu.tr</a> adresinden bize ulaşabilirsiniz.</p></details>
-    </div>
+    <div class="faq rv"><div class="faq-col"><details><summary>GEZEX ne zaman?</summary><p>Kasım'ın son iki haftası ile Aralık'ın ilk iki haftası arasındaki bir Salı, 13.00–18.00. Kesin tarih Instagram hesaplarımızdan duyurulacak.</p></details><details><summary>Nasıl başvururum?</summary><p>Başvuru formu yakında açılacak; üstteki <b>Yerini Ayırt</b> butonundan ulaşabileceksin. Duyuru için <a href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener">@ihugezi</a>'yi takip et.</p></details><details><summary>Oturumları sonradan izleyebilir miyim?</summary><p>Evet, konuşmalar TEDx formatında Gezi Kulübü'nün YouTube kanalında yayımlanacak.</p></details><details><summary>Kampüse nasıl gelirim?</summary><p>En kolayı M11 hattındaki İbn Haldun Üniversitesi istasyonu. M3 Başakşehir–Metrokent ve İETT hatları da var.</p></details></div><div class="faq-col"><details><summary>Kimler katılabilir?</summary><p>Tüm bölümlerden İHÜ öğrencileri ve dışarıdan katılımcılar. Kontenjan 100 kişi.</p></details><details><summary>Çekilişe nasıl katılırım?</summary><p>Kayıt masasında herkese kupon verilir; çekiliş 17.30'da yapılır.</p></details><details><summary>Konuşmacılar kesinleşti mi?</summary><p>Henüz değil; sayfadaki isimler aday konuşmacılar. Kesinleşenler ayrıca duyurulacak.</p></details><details><summary>Sponsor olabilir miyiz?</summary><p>Elbette. <a href="mailto:gezikulubu@stu.ihu.edu.tr">gezikulubu@stu.ihu.edu.tr</a> adresinden bize ulaşın.</p></details></div></div>
   </div>
 </section>
 
@@ -889,6 +897,11 @@ document.querySelectorAll("[data-basvuru]").forEach(a=>{
     if(!t){t=document.createElement("div");t.id="toast";document.body.appendChild(t)}
     t.textContent="Başvuru formu çok yakında burada açılacak ✦";t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("on"),2600)});
 });
+
+
+// dar ekranda ince ilerleme çubuğu
+(()=>{const b=document.createElement("div");b.className="topbar";document.body.appendChild(b);
+const f=()=>{const m=document.documentElement.scrollHeight-innerHeight;b.style.width=(m>0?scrollY/m*100:0)+"%"};addEventListener("scroll",f,{passive:true});f();})();
 
 // nav
 const nav=document.getElementById("nav"),links=document.getElementById("links");
