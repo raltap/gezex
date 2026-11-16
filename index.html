@@ -7,7 +7,7 @@
 <meta name="description" content="GEZEX: İbn Haldun Üniversitesi Gezi Kulübü ve Kariyer ve Gelişim Kulübü'nün seyahat kültürü zirvesi. Yolda öğrenmek, güvenle gezmek, yolu hayata dönüştürmek.">
 <meta property="og:title" content="GEZEX · Seyahat Kültürü Zirvesi">
 <meta property="og:description" content="Yolda öğrenmek, güvenle gezmek, yolu hayata dönüştürmek. 3 oturum, 1 gün, İbn Haldun Üniversitesi.">
-<meta name="theme-color" content="#0E1116">
+<meta name="theme-color" content="#0400D1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFD400'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='36' font-weight='700' fill='%230E1116' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -380,7 +380,7 @@ footer a:hover{color:var(--yellow)}
 /* sürüm butonu */
 .nav-links{gap:20px}
 .vswitch{display:flex;background:var(--ink);border-radius:99px;padding:4px;margin-left:16px;font-family:var(--mono);font-size:12px;font-weight:700;flex:none}
-.vswitch a{padding:6px 9px;border-radius:99px;text-decoration:none;color:#B8BEC8;white-space:nowrap}
+.vswitch a{padding:7px 12px;border-radius:99px;text-decoration:none;color:#B8BEC8;white-space:nowrap}
 .vswitch a.on{background:var(--yellow);color:var(--ink)}
 .vswitch a:not(.on):hover{color:var(--yellow)}
 .nav-in{gap:12px}
@@ -403,6 +403,71 @@ footer a:hover{color:var(--yellow)}
 #konusmacilar~* .prog{}
 @media (max-width:1280px){.prog span{display:none}.prog a:hover span{display:block;position:absolute;left:22px}}
 @media (max-width:860px){.prog{left:8px;gap:10px}.prog b{width:11px;height:11px}.prog-line{left:4.5px}}
+
+/* ===== TEMA: Kırmızı Pasaport ===== */
+:root{--terra:#0400D1;--terra-d:#03009E;--terra-l:#F5EFE4;--yellow:#D7263D;
+--ink:#0B0A3A;--ink-2:#3B3A5C;--muted:#706F86;--cream:#F5EFE4;--paper:#FBF8F3;--sand:#EFE6D8;--line:#E2D8C8;--olive:#1F6F54;--sky:#0400D1}
+.hero{background:radial-gradient(1100px 560px at 88% 8%,#FBE3E6 0%,transparent 60%),radial-gradient(900px 500px at 0% 100%,#DCE9E2 0%,transparent 60%),var(--cream)}
+.pass-tear::before,.pass-tear::after{background:var(--cream)}
+h1.title em{color:#fff;background:var(--yellow)}
+.kicker{background:#0400D1;color:#fff}.kicker i{background:var(--yellow)}
+.brand-dot,.nav-cta,.vswitch a.on,.nav-links a.active,.marquee,.pass-top,.prize:hover,.cta .btn-p,details[open] summary::after,.filter button.on,.filter button:hover,.prog a.now span{color:#fff!important}
+.marquee-track span::after,.pass-top b{color:#fff}
+.prize:hover svg{color:#fff}
+.btn-p{background:#0400D1;color:#fff;box-shadow:6px 6px 0 var(--yellow)}
+.btn-p:hover{background:#0400D1;box-shadow:3px 3px 0 var(--yellow)}
+.cta{background:#0400D1}.cta .btn-p{background:var(--yellow);box-shadow:6px 6px 0 #0B0A3A}.cta h2 em{color:#F5EFE4}
+#konusmacilar{background:#0400D1}
+#konusmacilar .sec-lede{color:#D9D8FF}
+#konusmacilar h2 em,#konusmacilar .eyebrow{color:#F5EFE4!important}
+.sp{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}
+.sp .role{color:#D9D8FF}
+.sp .chip{background:rgba(255,255,255,.12);color:#F5EFE4}
+.sp:hover{border-color:#F5EFE4}
+.filter button{border-color:rgba(255,255,255,.3)}
+.notice{background:rgba(255,255,255,.1);color:#F5EFE4;border-color:rgba(255,255,255,.35)}
+.qs li::before{background:#0400D1;color:#fff}
+.theme.t1{background:#0B0A3A}
+.theme.t2{background:#1F6F54;color:#fff}
+.kit{background:#0B0A3A}.kit-list li{background:rgba(255,255,255,.07)}
+.socials a:hover{background:#0400D1;color:#fff}
+.map-card a{background:#0400D1;color:#fff}
+footer{background:#0B0A3A}footer h6,footer a:hover{color:#F5EFE4}
+.session:hover .sn{color:var(--yellow)}
+.session:hover{border-color:#0400D1}
+.stat b{color:#0400D1}
+.tl.main .card{background:#0400D1;border-color:#0400D1}
+.tl.main .card p{color:#D9D8FF}
+.tl.main .pin{background:var(--yellow);border-color:#0B0A3A}
+.club.k .big-num{background:var(--yellow)}
+.ev{border-left-color:var(--yellow)}
+.stamp{color:var(--yellow);border-color:var(--yellow)}
+.hero-route path{stroke:#0400D1;opacity:.3}
+.prog-line i,.prog a.done b{background:#0400D1;border-color:#0400D1}
+.vswitch{background:#0B0A3A}.vswitch a{padding:6px 9px}
+
+/* === V4 düzeltmeleri === */
+.clubs3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.c3{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:26px;display:flex;flex-direction:column;transition:.3s}
+.c3:hover{transform:translateY(-4px);border-color:#0400D1;box-shadow:0 20px 40px -28px rgba(4,0,209,.5)}
+.c3-logo{width:92px;height:92px;border-radius:20px;background:#fff;border:1px solid var(--line);padding:8px;margin-bottom:18px}
+.c3-logo img{width:100%;height:100%;object-fit:contain}
+.c3-role{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--yellow);font-weight:700}
+.c3 h3{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:-.03em;line-height:1.15;margin:6px 0 10px}
+.c3 p{color:var(--ink-2);font-size:15px;margin-bottom:18px}
+.c3-stat{display:flex;align-items:baseline;gap:10px;margin-top:auto;padding-top:14px;border-top:1px dashed var(--line)}
+.c3-stat b{font-family:var(--serif);font-size:36px;font-weight:800;color:#0400D1;line-height:1}
+.c3-stat span{font-size:13px;color:var(--muted);font-weight:600}
+.c3-link{display:flex;align-items:center;gap:8px;margin-top:14px;padding:10px 14px;border-radius:12px;background:var(--cream);text-decoration:none;font-weight:700;font-size:13.5px;word-break:break-all;transition:.2s}
+.c3-link svg{width:16px;height:16px;fill:currentColor;flex:none}
+a.c3-link:hover{background:#0400D1;color:#fff}
+.c3-link.off{color:var(--muted)}
+#kulupler{padding-bottom:70px}
+.avatar.ph{padding:0}
+.avatar.ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;position:relative;z-index:1}
+#toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);background:#0B0A3A;color:#fff;padding:14px 22px;border-radius:14px;font-weight:600;font-size:15px;z-index:200;opacity:0;pointer-events:none;transition:.3s;box-shadow:0 14px 30px rgba(0,0,0,.25)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media (max-width:900px){.clubs3{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -420,9 +485,8 @@ footer a:hover{color:var(--yellow)}
       <li><a href="#odul">Ödüller</a></li>
       <li><a href="#kulupler">Kulüpler</a></li>
       <li><a href="#ulasim">Ulaşım</a></li>
-      <li><a href="#kayit" class="nav-cta">Kayıt Ol →</a></li>
+      <li><a href="#" class="nav-cta" data-basvuru>Başvur →</a></li>
     </ul>
-    <div class="vswitch" aria-label="Sürüm seç"><a class="on" href="./">V1</a><a href="v2/">V2</a><a href="v3/">V3</a><a href="v4/">V4</a><a href="v5/">V5</a></div>
     <button class="burger" id="burger" aria-label="Menüyü aç"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -439,7 +503,7 @@ footer a:hover{color:var(--yellow)}
       <p class="subtitle">Seyahat Kültürü Zirvesi</p>
       <p class="lede">Yolda öğrenmek, güvenle gezmek, yolu hayata dönüştürmek. Gezginler, seyyahlar ve yolu mesleğe dönüştürenlerle bir öğleden sonra boyunca dünyayı konuşuyoruz.</p>
       <div class="btns">
-        <a href="#kayit" class="btn btn-p">Yerini Ayırt <span>→</span></a>
+        <a href="#" class="btn btn-p" data-basvuru>Yerini Ayırt <span>→</span></a>
         <a href="#oturumlar" class="btn btn-o">Programı Keşfet</a>
       </div>
       <div class="organizers">
@@ -663,68 +727,37 @@ footer a:hover{color:var(--yellow)}
 <!-- CLUBS -->
 <section id="kulupler">
   <div class="wrap">
-    <div class="sec-head rv">
+    <div class="sec-head center rv">
       <div class="eyebrow">Düzenleyenler</div>
       <h2>Bu yolu <em>birlikte</em> çiziyoruz</h2>
-      <p class="sec-lede">GEZEX, İbn Haldun Üniversitesi'nin iki öğrenci kulübünün ortak projesi: biri yolu, diğeri kariyeri biliyor.</p>
+      <p class="sec-lede">GEZEX, İbn Haldun Üniversitesi'nin üç öğrenci kulübünün ortak projesi.</p>
     </div>
-
-    <article class="club rv">
-      <div class="club-side">
-        <div class="club-logo"><img src="assets/gezi.jpg" alt="İbn Haldun Üniversitesi Gezi Kulübü logosu"></div>
-        <div class="socials">
-          <a href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>@ihugezi</a>
-          <a href="https://www.youtube.com/channel/UCtsw1vH3ZVyRZvLgzL7372Q" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>YouTube kanalı</a>
-          <a href="mailto:gezikulubu@stu.ihu.edu.tr"><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2zM2 6l10 7 10-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>gezikulubu@stu.ihu.edu.tr</a>
-        </div>
-      </div>
-      <div>
-        <h3>İHÜ Gezi Kulübü</h3>
-        <div class="since">Ibn Haldun University Travel Club · نادي الرحلات</div>
-        <p>Gezi Kulübü, öğrencilerin hem birbirleriyle hem de yaşadıkları coğrafyayla kaynaşması için kurulmuş, İbn Haldun'un en hareketli topluluklarından biri. Rehber eşliğinde, öğrenci bütçesine uygun ve kontenjanlı gezilerle kampüsü her dönem Anadolu'nun farklı bir köşesine taşıyor.</p>
-        <p>Kulübün gezileri yalnızca manzara değil, bir öğrenme deneyimi olarak tasarlanıyor: Denizli Buldan'a yapılan <em>Kültür Yolu</em> gezisinde İstanbul'dan ve farklı ülkelerden gelen öğrenciler yerel el sanatları merkezini ziyaret edip tarihi çarşıda esnafla buluştu. Yeni dönemler genellikle Bolu Yedigöller gibi doğa rotalarıyla açılıyor; kış Uludağ'da, bahar Kapadokya'da geçiyor. Türkçe, İngilizce ve Arapça paylaşım yapan kulüp, uluslararası öğrencileri de yolculuğa katıyor.</p>
-        <p>GEZEX, bu birikimi bir adım öteye taşıma fikrinden doğdu: Gezmeyi seven bir topluluk olarak, yolu meslek ve yaşam biçimine dönüştürenleri kampüse davet etmek.</p>
-        <div class="big-num"><b data-count="20">0</b><span>şehir<br>son üç yılda düzenlenen gezilerle</span></div>
-        <h5>Rotalarından bazıları</h5>
-        <div class="cities">
-          <span class="city">🏔️ Bursa <small>Uludağ</small></span>
-          <span class="city">🎈 Nevşehir <small>Kapadokya</small></span>
-          <span class="city">🌲 Bolu <small>Yedigöller</small></span>
-          <span class="city">🧵 Denizli <small>Buldan · Kültür Yolu</small></span>
-          <span class="city">🕌 Edirne</span>
-          <span class="city">🪂 Tekirdağ</span>
-          <span class="city">🚆 Doğu Anadolu</span>
-          <span class="city">🌿 İstanbul <small>Atatürk Arboretumu</small></span>
-          <span class="city">🧭 Gez-Öğren <small>şehir içi seriler</small></span>
-        </div>
-      </div>
-    </article>
-
-    <article class="club k rv">
-      <div class="club-side">
-        <div class="club-logo"><img src="assets/kariyer.jpg" alt="İbn Haldun Üniversitesi Kariyer ve Gelişim Kulübü logosu"></div>
-        <div class="socials">
-          <a href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>@ihukariyergelisimkulubu</a>
-          <a href="https://www.metasummit.site" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2c3 3 3 17 0 20M12 2c-3 3-3 17 0 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>metasummit.site</a>
-          <a href="mailto:kariyergelisimkulubu@stu.ihu.edu.tr"><svg viewBox="0 0 24 24"><path d="M2 5h20v14H2zM2 6l10 7 10-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>kariyergelisimkulubu@stu.ihu.edu.tr</a>
-        </div>
-      </div>
-      <div>
-        <h3>İHÜ Kariyer ve Gelişim Kulübü</h3>
-        <div class="since">Career and Development Club</div>
-        <p>Kariyer ve Gelişim Kulübü, öğrencileri iş dünyasının önde gelen isimleri ve kurumlarıyla buluşturarak kampüs ile sektör arasında köprü kuruyor. Zirveler, paneller ve kurum buluşmalarıyla öğrencilerin daha mezun olmadan bir ağ kurmasını ve kendi kariyer yolunu bilinçli çizmesini hedefliyor.</p>
-        <p>Kulübün imza etkinliği <strong>META Summit</strong>; Ekonomi ve Finans Kulübü ile birlikte 2022'den bu yana düzenleniyor ve pazarlama, ekonomi, teknoloji ve yapay zekâ alanlarında sektörün öncü isimlerini İHÜ'ye getiriyor. Kulübün hazırladığı <strong>NextStep Zirvesi: Yeni Nesil Kariyer ve Gelişim Programı</strong> ÜNİDES kapsamında destek almaya hak kazandı. Borsa İstanbul, THY ve Turkcell gibi kurumlarla buluşmalar da kulübün öne çıkan çalışmaları arasında.</p>
-        <p>GEZEX'te kulüp, zirvenin "yolu kariyere dönüştürmek" ayağını üstleniyor: gezginliğin bir meslek, bir marka ve sürdürülebilir bir yaşam biçimi olarak nasıl kurulabileceğini sahneye taşıyor.</p>
-        <div class="big-num"><b data-count="4">0</b><span>META Summit<br>2022'den bu yana</span></div>
-        <h5>Öne çıkan çalışmalar</h5>
-        <div class="events">
-          <div class="ev"><b>META Summit</b><small>2022 · 2024 · 2025 · 2026 · Ekonomi ve Finans Kulübü ile</small></div>
-          <div class="ev"><b>NextStep Zirvesi</b><small>ÜNİDES destekli yeni nesil kariyer programı</small></div>
-          <div class="ev"><b>Kurum buluşmaları</b><small>Borsa İstanbul · THY · Turkcell</small></div>
-          <div class="ev"><b>GEZEX</b><small>Gezi Kulübü ile seyahat kültürü zirvesi</small></div>
-        </div>
-      </div>
-    </article>
+    <div class="clubs3">
+      <article class="c3 rv">
+        <div class="c3-logo"><img src="assets/gezi.jpg" alt="İHÜ Gezi Kulübü logosu"></div>
+        <span class="c3-role">YOL</span>
+        <h3>Gezi Kulübü</h3>
+        <p>Rehber eşliğinde, öğrenci bütçesine uygun gezilerle kampüsü Anadolu'nun dört bir yanına taşıyor. Uludağ'dan Kapadokya'ya, Buldan'dan Edirne'ye.</p>
+        <div class="c3-stat"><b data-count="20">0</b><span>şehir · son 3 yıl</span></div>
+        <a class="c3-link" href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>@ihugezi</a>
+      </article>
+      <article class="c3 rv">
+        <div class="c3-logo"><img src="assets/kariyer.jpg" alt="İHÜ Kariyer ve Gelişim Kulübü logosu"></div>
+        <span class="c3-role">KARİYER</span>
+        <h3>Kariyer ve Gelişim Kulübü</h3>
+        <p>Öğrencileri iş dünyasıyla buluşturuyor. 2022'den bu yana META Summit'i düzenliyor; NextStep Zirvesi ÜNİDES desteği aldı.</p>
+        <div class="c3-stat"><b data-count="4">0</b><span>META Summit</span></div>
+        <a class="c3-link" href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>@ihukariyergelisimkulubu</a>
+      </article>
+      <article class="c3 rv">
+        <div class="c3-logo"><img src="assets/iletisim.jpg" alt="İHÜ İletişim Kulübü (ICC) logosu"></div>
+        <span class="c3-role">İLETİŞİM</span>
+        <h3>İletişim Kulübü · ICC</h3>
+        <p>IHU Communication Club; iletişim, medya ve tasarımla uğraşan öğrencilerin kulübü. GEZEX'in tanıtımını, sosyal medyasını ve görsel kimliğini üstleniyor.</p>
+        <div class="c3-stat"><b>ICC</b><span>IHU Comms. Club</span></div>
+        <span class="c3-link off">GEZEX iletişim ortağı</span>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -738,8 +771,8 @@ footer a:hover{color:var(--yellow)}
     </div>
     <div class="tr-grid">
       <div class="tr-list">
-        <div class="tr rv"><div class="badge" style="background:#D43F8D">M3</div><div><b>Başakşehir–Metrokent Metro</b><small>Kampüse yaklaşık 4 km; istasyondan otobüs veya taksiyle devam.</small></div></div>
-        <div class="tr rv"><div class="badge" style="background:#8A6A3D">M11</div><div><b>İbn Haldun Üniversitesi İstasyonu</b><small>Gayrettepe–Halkalı hattı; istasyonun güncel durumunu Metro İstanbul'dan kontrol edin.</small></div></div>
+        <div class="tr rv"><div class="badge" style="background:#00A7E1">M3</div><div><b>Başakşehir–Metrokent</b><small>Kirazlı–Kayaşehir hattı; kampüse yaklaşık 4 km, istasyondan otobüs veya taksiyle devam.</small></div></div>
+        <div class="tr rv"><div class="badge" style="background:#AB548F">M11</div><div><b>İbn Haldun Üniversitesi İstasyonu · açık</b><small>Gayrettepe–İstanbul Havalimanı–Halkalı hattı; kampüse en yakın durak. Haziran 2026'da hizmete açıldı.</small></div></div>
         <div class="tr rv"><div class="badge" style="background:var(--sky)">İETT</div><div><b>Otobüs hatları</b><small>78C, 78E, 78F, 78G, 78K, 78Ş · Kayaşehir tarafından MK22</small></div></div>
         <div class="tr rv"><div class="badge" style="background:var(--olive)">🚗</div><div><b>Özel araç</b><small>Kuzey Marmara / TEM bağlantısıyla Başakşehir çıkışı. Kampüs girişinde kimlik kontrolü yapılır.</small></div></div>
         <div class="tr rv"><div class="badge" style="background:var(--terra)">⏱</div><div><b>Erken gel</b><small>Kayıt 13.00'te başlıyor; eşantiyon kiti ve çekiliş kuponu için 15 dk erken gelmeni öneririz.</small></div></div>
@@ -762,7 +795,7 @@ footer a:hover{color:var(--yellow)}
     <div class="faq rv">
       <details><summary>GEZEX ne zaman?</summary><p>Kasım'ın son iki haftası ile Aralık'ın ilk iki haftası arasındaki bir Salı günü, 13.00–18.00 saatleri arasında. Kesin tarih Instagram hesaplarımızdan ve bu sayfadan duyurulacak.</p></details>
       <details><summary>Kimler katılabilir?</summary><p>Tüm bölümlerden İbn Haldun Üniversitesi öğrencileri ve dışarıdan katılımcılar. Kontenjan 100 kişiyle sınırlı.</p></details>
-      <details><summary>Nasıl kayıt olabilirim?</summary><p>Kayıt formu çok yakında açılacak. Formun açıldığını kaçırmamak için <a href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener">@ihugezi</a> ve <a href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener">@ihukariyergelisimkulubu</a> hesaplarını takip et.</p></details>
+      <details><summary>Nasıl kayıt olabilirim?</summary><p>Başvuru formu çok yakında açılacak; sayfanın üstündeki <b>Yerini Ayırt</b> butonundan ulaşabileceksin. Formun açıldığını kaçırmamak için <a href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener">@ihugezi</a> ve <a href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener">@ihukariyergelisimkulubu</a> hesaplarını takip et.</p></details>
       <details><summary>Çekilişe nasıl katılırım?</summary><p>Kayıt masasında herkese bir çekiliş kuponu verilecek. Çekiliş 17.30'da program sonunda yapılacak; kuponunu saklamayı unutma.</p></details>
       <details><summary>Oturumları sonradan izleyebilir miyim?</summary><p>Evet. Konuşmalar TEDx formatında kaydedilip Gezi Kulübü'nün YouTube kanalında yayımlanacak.</p></details>
       <details><summary>Konuşmacılar kesinleşti mi?</summary><p>Hayır, sayfadaki isimler aday konuşmacılardır ve davet süreci devam ediyor. Kesinleşen konuşmacılar ayrıca duyurulacak.</p></details>
@@ -771,21 +804,6 @@ footer a:hover{color:var(--yellow)}
   </div>
 </section>
 
-<!-- CTA -->
-<section id="kayit" style="padding:40px 0 0">
-  <div class="wrap">
-    <div class="cta rv">
-      <svg class="r" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><path d="M-20 340 C 200 300, 300 120, 520 180 S 860 360, 1000 160 S 1180 40, 1240 30" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="2 14" stroke-linecap="round"/></svg>
-      <div class="eyebrow" style="color:#fff;justify-content:center">Yerini ayırt</div>
-      <h2>Yol bir okuldur. <em>Derse geç kalma.</em></h2>
-      <p>Kontenjan 100 kişi. Kayıt formu açıldığında ilk duyan olmak için kulüplerimizi takip et.</p>
-      <div class="btns" style="justify-content:center">
-        <a href="https://www.instagram.com/ihugezi/" target="_blank" rel="noopener" class="btn btn-p">@ihugezi'yi takip et →</a>
-        <a href="https://www.instagram.com/ihukariyergelisimkulubu/" target="_blank" rel="noopener" class="btn btn-o">@ihukariyergelisimkulubu</a>
-      </div>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">
@@ -819,22 +837,22 @@ footer a:hover{color:var(--yellow)}
 // Aday konuşmacılar (davet süreci sürüyor)
 const speakers=[
   {n:"Seymen Bozaslan",r:"Gezgin, fotoğrafçı ve yazar · 81 ilde 270 destinasyon, Evliya Çelebi'nin izinde 74 şehir",s:"s1"},
-  {n:"Orkun Olgar",r:"Gezgin ve içerik üreticisi",s:"s1"},
+  {n:"Orkun Olgar",r:"Gezgin ve içerik üreticisi",s:"s1",img:"orkun"},
   {n:"Reshid Strick",r:"Gezgin",s:"s1"},
-  {n:"Asil Özbay",r:"Akademisyen ve motosikletli gezgin · 3 kıtada solo yolculuk",s:"s2"},
-  {n:"Şeyma Yolda",r:"Gezgin · yol hikâyesiyle",s:"s2"},
-  {n:"Nurten Yulu",r:"Gezgin · Okinawa Travel",s:"s2"},
-  {n:"Fatmanur Aydın",r:"Gezgin · Okinawa Travel",s:"s2"},
-  {n:"Kerem Akyol",r:"Gezgin ve içerik üreticisi · Kekmundo",s:"s3"},
-  {n:"Selahattin Baltacı",r:"Gezgin ve içerik üreticisi · Gez",s:"s3"},
-  {n:"Rotasız Seyyah",r:"Gezgin ve içerik üreticisi",s:"s3"}
+  {n:"Asil Özbay",r:"Akademisyen ve motosikletli gezgin · 3 kıtada solo yolculuk",s:"s2",img:"asil"},
+  {n:"Şeyma Yolda",r:"Gezgin · yol hikâyesiyle",s:"s2",img:"seyma"},
+  {n:"Nurten Yulu",r:"Gezgin · Okinawa Travel",s:"s2",img:"okinawa"},
+  {n:"Fatmanur Aydın",r:"Gezgin · Okinawa Travel",s:"s2",img:"okinawa"},
+  {n:"Kerem Akyol",r:"Gezgin ve içerik üreticisi · Kekmundo",s:"s3",img:"kerem"},
+  {n:"Selahattin Baltacı",r:"Gezgin ve içerik üreticisi · Gez",s:"s3",img:"selahattin"},
+  {n:"Rotasız Seyyah",r:"Gezgin ve içerik üreticisi",s:"s3",img:"rotasiz"}
 ];
 const sLabel={s1:"Oturum 1 · adayı",s2:"Oturum 2 · adayı",s3:"Oturum 3 · adayı"};
 const colors=["#FFD400","#8FB3FF","#FFFFFF","#7FE0A8","#FF9F7A"];
 const tr=s=>s.split(" ").filter(w=>/^[A-ZÇĞİÖŞÜ]/.test(w)).slice(0,2).map(w=>w[0]).join("");
 document.getElementById("speakers").innerHTML=speakers.map((p,i)=>`
   <div class="sp rv" data-s="${p.s}">
-    <div class="avatar" style="background:${colors[i%colors.length]};color:${colors[i%colors.length]}"><span style="color:var(--ink)">${tr(p.n)}</span></div>
+    <div class="avatar${p.img?" ph":""}" style="background:${colors[i%colors.length]};color:${colors[i%colors.length]}">${p.img?`<img src="assets/konusmaci/${p.img}.jpg" alt="${p.n}" loading="lazy">`:`<span style="color:var(--ink)">${tr(p.n)}</span>`}</div>
     <h4>${p.n}</h4><div class="role">${p.r}</div><span class="chip">${sLabel[p.s]}</span>
   </div>`).join("");
 document.getElementById("filter").addEventListener("click",e=>{
@@ -845,7 +863,7 @@ document.getElementById("filter").addEventListener("click",e=>{
 
 // konum göstergesi: menü vurgusu + sol ilerleme çizgisi
 (()=>{
-  const ids=[["top","Başlangıç"],["hakkinda","Hakkında"],["oturumlar","Oturumlar"],["konusmacilar","Konuşmacılar"],["program","Program"],["odul","Ödüller"],["kulupler","Kulüpler"],["ulasim","Ulaşım"],["sss","SSS"],["kayit","Kayıt"]];
+  const ids=[["top","Başlangıç"],["hakkinda","Hakkında"],["oturumlar","Oturumlar"],["konusmacilar","Konuşmacılar"],["program","Program"],["odul","Ödüller"],["kulupler","Kulüpler"],["ulasim","Ulaşım"],["sss","SSS"]];
   const rail=document.createElement("nav");rail.className="prog";rail.setAttribute("aria-label","Bölümler");
   rail.innerHTML='<div class="prog-line"><i></i></div>'+ids.map(([id,t])=>`<a href="#${id}" data-id="${id}"><b></b><span>${t}</span></a>`).join("");
   document.body.appendChild(rail);
@@ -861,6 +879,16 @@ document.getElementById("filter").addEventListener("click",e=>{
   };
   addEventListener("scroll",()=>requestAnimationFrame(tick),{passive:true});tick();
 })();
+
+
+// Başvuru linki: form hazır olunca BASVURU_URL'e yaz
+const BASVURU_URL="";
+document.querySelectorAll("[data-basvuru]").forEach(a=>{
+  if(BASVURU_URL){a.href=BASVURU_URL;a.target="_blank";a.rel="noopener";return}
+  a.addEventListener("click",e=>{e.preventDefault();let t=document.getElementById("toast");
+    if(!t){t=document.createElement("div");t.id="toast";document.body.appendChild(t)}
+    t.textContent="Başvuru formu çok yakında burada açılacak ✦";t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("on"),2600)});
+});
 
 // nav
 const nav=document.getElementById("nav"),links=document.getElementById("links");
