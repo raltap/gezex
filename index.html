@@ -502,6 +502,10 @@ a.c3-link:hover{background:#0400D1;color:#fff}
 @media (max-width:760px){.faq{grid-template-columns:1fr}.faq-col+.faq-col details:first-child{border-top:0}}
 /* sol çizgi sadece geniş ekranda; dar ekranda üstte ince çubuk */
 @media (max-width:1320px){.prog{display:none!important}}
+/* sol çizgi: yalnızca noktalar tıklanır; etiketler içeriğin üstünü kaplamaz */
+.prog,.prog.show{width:auto;align-items:flex-start;pointer-events:none}
+.prog.show a{pointer-events:auto;width:14px}
+.prog span{position:absolute;left:24px;top:50%;margin-top:-11px;pointer-events:none}
 .topbar{position:fixed;left:0;top:0;height:3px;width:0;background:var(--yellow);z-index:60;transition:width .1s linear}
 @media (min-width:1321px){.topbar{display:none}}
 
