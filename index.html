@@ -8,7 +8,9 @@
 <meta property="og:title" content="GEZEX · Seyahat Kültürü Zirvesi">
 <meta property="og:description" content="Yolda öğrenmek, güvenle gezmek, yolu hayata dönüştürmek. 3 oturum, 1 gün, İbn Haldun Üniversitesi.">
 <meta name="theme-color" content="#0400D1">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FFD400'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='36' font-weight='700' fill='%230E1116' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="assets/logo/ikon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/logo/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -484,6 +486,22 @@ a.c3-link:hover{background:#0400D1;color:#fff}
 @media (max-width:1320px){.prog{display:none!important}}
 .topbar{position:fixed;left:0;top:0;height:3px;width:0;background:var(--yellow);z-index:60;transition:width .1s linear}
 @media (min-width:1321px){.topbar{display:none}}
+
+/* === Yol Z yeşil logo (marka kılavuzu): logo zümrüt, arayüz ICC laciverti === */
+.brand-logo{height:34px;width:auto;display:block}
+.f-logo{height:74px}
+h1.title.title-logo{line-height:1;margin:26px 0 14px}
+h1.title.title-logo img{display:block;width:min(560px,100%);height:auto}
+.hero{background:radial-gradient(1100px 560px at 88% 8%,#E4E3FC 0%,transparent 60%),radial-gradient(900px 500px at 0% 100%,#DCE9E2 0%,transparent 60%),var(--cream)}
+.hero-route path{stroke:#0400D1;opacity:.35;stroke-width:3.5}
+#konusmacilar{background:linear-gradient(rgba(4,0,209,.6),rgba(4,0,209,.6)),url(assets/logo/desen-lacivert.svg) center/640px repeat #0400D1}
+.topbar{background:#0400D1}
+.hero-grid>div{min-width:0}
+.nav-cta{background:#0400D1!important}.nav-cta:hover{background:#0B0A3A!important}
+.pass-top{background:#0400D1!important}
+.nav-links a.active{background:#0400D1!important}
+.marquee{background:#0400D1!important}
+@media (max-width:760px){.brand-logo{height:28px}.f-logo{height:62px}h1.title.title-logo img{width:min(420px,100%)}}
 </style>
 </head>
 <body>
@@ -492,7 +510,7 @@ a.c3-link:hover{background:#0400D1;color:#fff}
 <!-- NAV -->
 <nav id="nav">
   <div class="wrap nav-in">
-    <a href="#top" class="brand"><span class="brand-dot">G</span>GEZEX</a>
+    <a href="#top" class="brand" aria-label="GEZEX ana sayfa"><img class="brand-logo" src="assets/logo/gezex-logo.svg" alt="GEZEX"></a>
     <ul class="nav-links" id="links">
       <li><a href="#hakkinda">Hakkında</a></li>
       <li><a href="#oturumlar">Oturumlar</a></li>
@@ -515,7 +533,7 @@ a.c3-link:hover{background:#0400D1;color:#fff}
   <div class="wrap hero-grid">
     <div>
       <span class="kicker"><i></i>İbn Haldun Üniversitesi · 2026</span>
-      <h1 class="title">GEZ<em>EX</em></h1>
+      <h1 class="title title-logo"><img src="assets/logo/gezex-logo.svg" alt="GEZEX" width="343" height="74"></h1>
       <p class="subtitle">Seyahat Kültürü Zirvesi</p>
       <p class="lede">Yolda öğrenmek, güvenle gezmek, yolu hayata dönüştürmek. Gezginler, seyyahlar ve yolu mesleğe dönüştürenlerle bir öğleden sonra boyunca dünyayı konuşuyoruz.</p>
       <div class="btns">
@@ -817,7 +835,7 @@ a.c3-link:hover{background:#0400D1;color:#fff}
   <div class="wrap">
     <div class="f-grid">
       <div>
-        <a href="#top" class="brand"><span class="brand-dot">G</span>GEZEX</a>
+        <a href="#top" class="brand" aria-label="GEZEX ana sayfa"><img class="brand-logo f-logo" src="assets/logo/gezex-logo-beyaz.svg" alt="GEZEX · Seyahat Kültürü Zirvesi"></a>
         <p style="max-width:360px;font-size:14px">Seyahat Kültürü Zirvesi. İbn Haldun Üniversitesi Gezi Kulübü ve Kariyer ve Gelişim Kulübü iş birliğiyle.</p>
         <div class="f-logos"><img src="assets/gezi.jpg" alt="Gezi Kulübü"><img src="assets/kariyer.jpg" alt="Kariyer ve Gelişim Kulübü"></div>
         <img class="ihu-mark" src="assets/ihu.svg" alt="İbn Haldun Üniversitesi">
